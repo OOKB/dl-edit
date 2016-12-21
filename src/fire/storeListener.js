@@ -1,7 +1,7 @@
 import { forEach, partial } from 'lodash'
 import { dbChanges, handleAuth, typeLoadWatch } from './handler'
 
-const types = ['MediaObject', 'Person']
+const types = ['MediaObject', 'OrderTrackItem', 'Person']
 
 export default function storeListener(firebase, store) {
   const loadWatchType = typeLoadWatch(firebase, store)

@@ -1,10 +1,10 @@
 import firebase from 'firebase'
 
 export const config = {
-  apiKey: 'AIzaSyDNuZRCjZuq7P5mHsbG_68E9bOK-wCngeo',
-  authDomain: 'cape-io.firebaseapp.com',
-  databaseURL: 'https://cape-io.firebaseio.com',
-  storageBucket: 'cape-io.appspot.com',
+  apiKey: 'AIzaSyDmoWCc7mwN02lTBrp0mKmh8oeu_k86C5U',
+  authDomain: 'delanylong.firebaseapp.com',
+  databaseURL: 'https://delanylong.firebaseio.com',
+  storageBucket: 'delanylong.appspot.com',
 }
 firebase.initializeApp(config)
 

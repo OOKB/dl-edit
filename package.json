@@ -1,6 +1,6 @@
 {
   "name": "dl-edit",
-  "homepage": "http://dl.cape.io",
+  "homepage": "http://edit.delanyandlong.com",
   "version": "0.2.0",
   "private": true,
   "devDependencies": {
@@ -46,6 +46,6 @@
     "eject": "react-scripts eject",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "upload": "b2 sync --delete --replaceNewer build b2://cape-io/cape-website"
+    "upload": "b2 sync --delete --replaceNewer build b2://cape-io/dl-edit"
   }
 }
