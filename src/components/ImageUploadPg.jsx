@@ -18,8 +18,7 @@ Image.propTypes = {
   url: PropTypes.string.isRequired,
 }
 
-function ImageUploadPg({ collectionId, images, handleUpload }) {
-  const accept = 'image/*'
+function ImageUploadPg({ accept, collectionId, images, handleUpload }) {
   return (
     <Page className="App">
       <h1>Upload an image</h1>
@@ -29,6 +28,7 @@ function ImageUploadPg({ collectionId, images, handleUpload }) {
   )
 }
 ImageUploadPg.propTypes = {
+  accept: PropTypes.string.isRequired,
   collectionId: PropTypes.string.isRequired,
   handleUpload: PropTypes.func.isRequired,
   images: PropTypes.array,

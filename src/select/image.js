@@ -1,7 +1,9 @@
 import { flow, partial } from 'lodash'
 import { map, orderBy, pick } from 'lodash/fp'
 import { callWith, replaceField } from 'cape-lodash'
-import { clear, meta, onBlur, saved, saveProgress } from 'redux-field'
+import {
+  clear, clearError, error, fieldValue, meta, onBlur, saved, saveProgress,
+} from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { createSelector } from 'reselect'
 import { structuredSelector } from 'cape-select'
@@ -16,6 +18,7 @@ import { selectItems } from './items'
 
 const { storage } = firebase
 
+export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
 export const debugReturn = (item) => { console.log(item); return item }
 export const onProgress = dispatch => flow(
@@ -51,13 +54,23 @@ export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
   )
   return uploadTask
 }
+export const invalidType = ({ fileFormat }) =>
+  error(collectionId, `Invalid file type. Expected ${ACCEPT_FILE_TYPE}, got ${fileFormat}.`)
+export const getError = fieldValue(collectionId, 'error')
 // Upload a file.
 export const handleUpload = file => (dispatch, getState) => {
+  const state = getState()
+  if (!file.isAccepted) {
+    dispatch(invalidType(file))
+  } else if (getError(state)) {
+    dispatch(clearError(collectionId))
+  }
   dispatch(onBlur(collectionId, omitFile(file)))
   // clearFileSelect(dispatch)
-  const agent = selectUser(getState())
+  const agent = selectUser(state)
   // if (file) loadSha(file, uploadImage(dispatch, agent))
   console.log(file)
+  return undefined
 }
 
 export const getImg = flow(
@@ -72,6 +85,7 @@ export const getImages = createSelector(
   )
 )
 export const imageSelector = structuredSelector({
+  accept: ACCEPT_FILE_TYPE,
   collectionId,
   images: getImages,
 })

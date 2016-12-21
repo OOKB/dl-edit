@@ -1,9 +1,9 @@
 import {
-  flow, get, identity, isFunction,
-  partial, partialRight, property, stubTrue,
+  defaultTo, flow, get, head, identity, isFunction, last, over,
+  partial, partialRight, property, spread, stubTrue, toLower,
 } from 'lodash'
-import { eq, filter, find, map, omit } from 'lodash/fp'
-import { setField } from 'cape-lodash'
+import { eq, filter, find, map, omit, split } from 'lodash/fp'
+import { setField, setWith } from 'cape-lodash'
 import accepts from 'attr-accept'
 
 const mapWithKey = map.convert({ cap: false })
@@ -33,6 +33,15 @@ export function getFiles(event) {
   return Array.prototype.slice.call(files)
 }
 export const handleDrop = flow(prevDef, getFiles)
+
+export const extConvert = {
+  jpg: 'jpeg',
+  yml: 'yaml',
+}
+export function convertExt(ext) { return extConvert[ext] || ext }
+export const getExt = flow(split('.'), last, toLower, convertExt)
+export const setExt = setWith('ext', 'name', getExt)
+
 export function fileMeta(file, index = 0) {
   if (!file.type && !file.name) {
     console.error(file)
@@ -59,6 +68,7 @@ export const acceptChecker = accept => flow(
 
 export const getFile = props => flow(
   fileMeta,
+  setExt,
   setField('isAccepted', props.accept ? acceptChecker(props.accept) : stubTrue)
 )
 export const acceptedPred = { isAccepted: true }
@@ -66,6 +76,8 @@ export const acceptedPred = { isAccepted: true }
 export const onlyAccepted = filter(acceptedPred)
 // Return first isAccepted.
 export const firstAccepted = find(acceptedPred)
+export const getFirst = flow(over(firstAccepted, head), spread(defaultTo))
+
 // Remove file field from object.
 export const omitFile = omit('file')
 // Only accepted files and without file property.
@@ -80,7 +92,7 @@ export const handleBlur = ({ multiple, onBlur }) => (files) => {
 export const handleSelect = props => flow(
   handleDrop,
   mapWithKey(getFile(props)),
-  props.multiple ? identity : firstAccepted,
+  props.multiple ? identity : getFirst,
   props.onSelect || (isFunction(props.onBlur) && handleBlur(props)) || identity
 )
 

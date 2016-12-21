@@ -6,10 +6,11 @@ import DropZone from './DropZone'
 import FileInput from './FileInput'
 import FileDetails from './FileDetails'
 
-function FileSelect({ hasBlur, value, ...props }) {
+function FileSelect({ error, hasBlur, value, ...props }) {
   const onSelect = handleSelect(props)
   return (
     <div>
+      {error && <p>{error}</p>}
       {hasBlur && <p className="uploading">Uploading</p>}
       {!hasBlur &&
         <div>
@@ -22,6 +23,7 @@ function FileSelect({ hasBlur, value, ...props }) {
   )
 }
 FileSelect.propTypes = {
+  error: PropTypes.string,
   hasBlur: PropTypes.bool,
   value: PropTypes.shape({
     name: React.PropTypes.string,

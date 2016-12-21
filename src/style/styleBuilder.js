@@ -82,6 +82,8 @@ export function buildNumSizes(style, prefix, start = 0, end = 11) {
 }
 // Builds an object with the position property set to the first argument.
 // Example: pos('static') == { position: 'static' }
+export const algnCnt = createObj('alignContent')
+export const disp = createObj('display')
 export const pos = createObj('position')
 export const bgColor = createObj('backgroundColor')
 export const float = createObj('float')
@@ -99,6 +101,7 @@ export const styles = {
   ...remStyleBuilder('padding', 'p', ['padding', '']),
   ...remStyleBuilder('borderWidth', 'bw', ['border', 'Width']),
   absolute: pos('absolute'),
+  b: { fontWeight: 'bold' },
   bn: merge(allSides('border', 'Style', 'none'), allSides('border', 'Width')),
   ba: { borderStyle: 'solid', ...allSides('border', 'Width') },
   bb: { borderBottomStyle: 'solid', borderBottomWidth: '1px' },
@@ -108,7 +111,7 @@ export const styles = {
   bgTrans: { background: 'transparent' },
   bl: { borderLeftStyle: 'solid', borderLeftWidth: '1px' },
   bln: { borderLeft: 'none' },
-  block: { display: 'block' },
+  block: disp('block'),
   bottom0: { bottom: 0 },
   br: { borderRightStyle: 'solid', borderRightWidth: '1px' },
   brn: { borderRight: 'none' },
@@ -116,15 +119,15 @@ export const styles = {
   btn: { borderTop: 'none' },
   column: floatLeft,
   columnRtl: floatRight,
-  contentAround: { alignContent: 'space-around' },
-  contentCenter: { alignContent: 'center' },
-  contentEnd: { alignContent: 'flex-end' },
-  contentBetween: { alignContent: 'space-between' },
-  contentStart: { alignContent: 'flex-start' },
-  contentStretch: { alignContent: 'stretch' },
+  contentAround: algnCnt('space-around'),
+  contentCenter: algnCnt('center'),
+  contentEnd: algnCnt('flex-end'),
+  contentBetween: algnCnt('space-between'),
+  contentStart: algnCnt('flex-start'),
+  contentStretch: algnCnt('stretch'),
   fixed: pos('fixed'),
   fl: floatLeft,
-  flex: { display: 'flex' },
+  flex: disp('flex'),
   ...buildNumSizes('flex', 'flex'),
   flexAuto: { flex: '1 1 auto', minWidth: 0, minHeight: 0 },
   flexColumn: { flexDirection: 'column' },
@@ -134,6 +137,7 @@ export const styles = {
   fr: floatRight,
   h100: { height: '100%' },
   h100vh: { height: '100vh' },
+  i: { fontStyle: 'italic' },
   inlineBlock: { display: 'inline-block' },
   itemsBaseline: { alignItems: 'baseline' },
   itemsCenter: { alignItems: 'center' },
