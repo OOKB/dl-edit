@@ -1,21 +1,20 @@
 import { createSelector } from 'reselect'
 import { partialRight } from 'lodash'
 // import { structuredSelector } from 'cape-select'
-import { onBlur, onChange, onDragEnter, onDragLeave } from 'redux-field'
+import { onBlur, onDragEnter, onDragLeave } from 'redux-field'
 import { createConnect, getFieldState } from '../capeField'
-import Component from './DropZone'
+import Component from './FileSelect'
 
 export const mapStateToProps = createSelector(
   partialRight(getFieldState, {}),
   ({ blur, focus }) => ({
-    hasHover: focus,
-    uploadStarted: blur,
+    hasBlur: blur,
+    hasFocus: focus,
   })
 )
 
 const actions = {
   onBlur,
-  onChange,
   onDragEnter,
   onDragLeave,
 }

@@ -77,11 +77,11 @@ export const handleBlur = ({ multiple, onBlur }) => (files) => {
 // export const debugReturn = (item) => { console.log(item); return item }
 
 // Trying to provide helpful but limited defaults.
-export const handleOnDrop = props => flow(
+export const handleSelect = props => flow(
   handleDrop,
   mapWithKey(getFile(props)),
   props.multiple ? identity : firstAccepted,
-  props.onDrop || props.onChange || (isFunction(props.onBlur) && handleBlur(props)) || identity
+  props.onSelect || (isFunction(props.onBlur) && handleBlur(props)) || identity
 )
 
 export function humanFileSize(bytes) {

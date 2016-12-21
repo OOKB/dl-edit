@@ -1,11 +1,6 @@
 import firebase from 'firebase'
+import { firebase as config } from '../config'
 
-export const config = {
-  apiKey: 'AIzaSyDmoWCc7mwN02lTBrp0mKmh8oeu_k86C5U',
-  authDomain: 'delanylong.firebaseapp.com',
-  databaseURL: 'https://delanylong.firebaseio.com',
-  storageBucket: 'delanylong.appspot.com',
-}
 firebase.initializeApp(config)
 
 export const TIMESTAMP = firebase.database.ServerValue.TIMESTAMP

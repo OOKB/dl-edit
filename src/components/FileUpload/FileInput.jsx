@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react'
 
-import { handleOnDrop } from './dropZoneUtils'
-
 // Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
 
-function FileInput(props) {
-  const { accept, message, uploadStarted } = props
+function FileInput({ accept, message, onSelect, uploadStarted }) {
   // Display empty div when upload has started.
   if (uploadStarted) return <div className="uploading" />
   return (
@@ -15,7 +12,7 @@ function FileInput(props) {
         accept={accept}
         type="file"
         name="fileselect"
-        onChange={handleOnDrop(props)}
+        onChange={onSelect}
       />
     </div>
   )
@@ -23,9 +20,9 @@ function FileInput(props) {
 
 FileInput.propTypes = {
   accept: PropTypes.string,
-  id: PropTypes.string,
+  // id: PropTypes.string,
   message: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
   uploadStarted: PropTypes.bool,
 }
 FileInput.defaultProps = {

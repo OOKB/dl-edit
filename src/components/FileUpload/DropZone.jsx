@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import css from '../../style'
-import { handleHover, handleOnDrop } from './dropZoneUtils'
+import { handleHover } from './dropZoneUtils'
 
 const baseStyle = css('bgGray mw7 p2 m2 h7')
 const styles = {
@@ -10,30 +10,31 @@ const styles = {
 
 // Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
 
-function DropZone({ hasHover, message, style, uploadStarted, ...rest }) {
+function DropZone({ hasFocus, message, onSelect, style, hasBlur, ...rest }) {
   // Display empty div when upload has started.
-  if (uploadStarted) return <div className="uploading" />
-  const inlineStyle = hasHover ? styles.onHover : styles.base
+  if (hasBlur) return <div className="uploading" />
+  const inlineStyle = hasFocus ? styles.onHover : styles.base
   // console.log(rest)
   return (
-    <div {...rest} style={{ ...inlineStyle, ...style }} onDrop={handleOnDrop(rest)}>
+    <div {...rest} style={{ ...inlineStyle, ...style }} onDrop={onSelect}>
       <p>{message}</p>
-      {hasHover && <p>Drop it</p>}
+      {hasFocus && <p>Drop it</p>}
     </div>
   )
 }
 
 DropZone.propTypes = {
   // hasBlur: PropTypes.bool,
-  hasHover: PropTypes.bool,
+  hasFocus: PropTypes.bool,
   id: PropTypes.string,
   onDragEnter: PropTypes.func,
   onDragLeave: PropTypes.func,
   onDragOver: PropTypes.func,
   onDrop: PropTypes.func,
+  onSelect: PropTypes.func,
   message: PropTypes.string.isRequired,
   style: PropTypes.object,
-  uploadStarted: PropTypes.bool,
+  hasBlur: PropTypes.bool,
 }
 DropZone.defaultProps = {
   message: 'Drop in a new file to upload.',

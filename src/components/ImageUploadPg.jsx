@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 import { map } from 'lodash'
 // import css from '../style'
 import Page from './Page'
-import DropZone from './FileUpload/DropZoneContainer'
-import FileInput from './FileUpload/FileInputContainer'
+import FileSelect from './FileUpload/FileSelectContainer'
 
 const start = 1481955756282
 function Image({ dateCreated, name, url }) {
@@ -24,8 +23,7 @@ function ImageUploadPg({ collectionId, images, handleUpload }) {
   return (
     <Page className="App">
       <h1>Upload an image</h1>
-      <DropZone accept={accept} collectionId={collectionId} onDrop={handleUpload} />
-      <FileInput accept={accept} collectionId={collectionId} />
+      <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
       {images && map(images, (img, key) => <Image key={key} {...img} />)}
     </Page>
   )
