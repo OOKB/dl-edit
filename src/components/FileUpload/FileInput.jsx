@@ -13,6 +13,7 @@ function FileInput({ accept, message, onSelect, uploadStarted }) {
         type="file"
         name="fileselect"
         onChange={onSelect}
+        value=""
       />
     </div>
   )

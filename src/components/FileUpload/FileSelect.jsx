@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import { handleSelect } from './dropZoneUtils'
 
 import DropZone from './DropZone'
 import FileInput from './FileInput'
-// Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
+import FileDetails from './FileDetails'
 
-function FileSelect(props) {
+function FileSelect({ hasBlur, value, ...props }) {
   const onSelect = handleSelect(props)
   return (
     <div>
-      <DropZone {...props} onSelect={onSelect} />
-      <FileInput {...props} onSelect={onSelect} />
+      {hasBlur && <p className="uploading">Uploading</p>}
+      {!hasBlur &&
+        <div>
+          <DropZone {...props} onSelect={onSelect} />
+          <FileInput {...props} onSelect={onSelect} />
+        </div>
+      }
+      {value && <FileDetails {...value} />}
     </div>
   )
 }
-
+FileSelect.propTypes = {
+  hasBlur: PropTypes.bool,
+  value: PropTypes.shape({
+    name: React.PropTypes.string,
+  }),
+}
 export default FileSelect

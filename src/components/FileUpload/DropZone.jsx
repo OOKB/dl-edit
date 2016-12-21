@@ -10,9 +10,7 @@ const styles = {
 
 // Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
 
-function DropZone({ hasFocus, message, onSelect, style, hasBlur, ...rest }) {
-  // Display empty div when upload has started.
-  if (hasBlur) return <div className="uploading" />
+function DropZone({ hasFocus, message, onSelect, style, ...rest }) {
   const inlineStyle = hasFocus ? styles.onHover : styles.base
   // console.log(rest)
   return (
@@ -24,7 +22,6 @@ function DropZone({ hasFocus, message, onSelect, style, hasBlur, ...rest }) {
 }
 
 DropZone.propTypes = {
-  // hasBlur: PropTypes.bool,
   hasFocus: PropTypes.bool,
   id: PropTypes.string,
   onDragEnter: PropTypes.func,
@@ -34,7 +31,6 @@ DropZone.propTypes = {
   onSelect: PropTypes.func,
   message: PropTypes.string.isRequired,
   style: PropTypes.object,
-  hasBlur: PropTypes.bool,
 }
 DropZone.defaultProps = {
   message: 'Drop in a new file to upload.',
