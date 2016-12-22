@@ -3,6 +3,7 @@ import { map } from 'lodash'
 // import css from '../style'
 import Page from './Page'
 import FileSelect from './FileUpload/FileSelectContainer'
+import Item from './Item'
 
 const start = 1481955756282
 function Image({ dateCreated, name, url }) {
@@ -18,11 +19,12 @@ Image.propTypes = {
   url: PropTypes.string.isRequired,
 }
 
-function ImageUploadPg({ accept, collectionId, images, handleUpload }) {
+function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (
     <Page className="App">
       <h1>Upload an image</h1>
       <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
+      {item && <Item {...item} />}
       {images && map(images, (img, key) => <Image key={key} {...img} />)}
     </Page>
   )
@@ -32,5 +34,8 @@ ImageUploadPg.propTypes = {
   collectionId: PropTypes.string.isRequired,
   handleUpload: PropTypes.func.isRequired,
   images: PropTypes.array,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }),
 }
 export default ImageUploadPg

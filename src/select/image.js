@@ -1,12 +1,12 @@
 import { flow, partial, property } from 'lodash'
-import { add, eq, map, orderBy, pick, size, split } from 'lodash/fp'
+import { add, map, orderBy, pick, size, split } from 'lodash/fp'
 import { callWith, replaceField } from 'cape-lodash'
+import { createSelector } from 'reselect'
+import { getSelect, structuredSelector } from 'cape-select'
 import {
   clear, clearError, error, fieldValue, meta, onBlur, saved, saveProgress,
 } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
-import { createSelector } from 'reselect'
-import { structuredSelector } from 'cape-select'
 import { selectUser } from 'cape-redux-auth'
 
 import { CDN_URL } from '../config'
@@ -14,7 +14,7 @@ import { omitFile } from '../components/FileUpload/dropZoneUtils'
 import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
 import * as firebase from '../fire'
 import { entitySet, entityUpdate } from '../fire/util'
-import { findItemFromFile } from './items'
+import { getIdFromFile, selectItems } from './items'
 
 const { storage } = firebase
 
@@ -73,8 +73,6 @@ export const handleUpload = file => (dispatch, getState) => {
   } else if (getError(state)) {
     dispatch(clearError(collectionId))
   }
-  const item = findItemFromFile(state, file)
-  console.log('item', item)
   dispatch(onBlur(collectionId, omitFile(file)))
   // clearFileSelect(dispatch)
   const agent = selectUser(state)
@@ -82,6 +80,10 @@ export const handleUpload = file => (dispatch, getState) => {
   console.log(file)
   return undefined
 }
+export const findItemFromFile = getSelect(
+  selectItems,
+  flow(fieldValue(collectionId), getIdFromFile),
+)
 
 export const getImg = flow(
   pick(['dateCreated', 'name', 'url']),
@@ -98,4 +100,5 @@ export const imageSelector = structuredSelector({
   accept: ACCEPT_FILE_TYPE,
   collectionId,
   images: getImages,
+  item: findItemFromFile,
 })
