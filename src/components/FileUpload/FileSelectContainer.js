@@ -9,7 +9,7 @@ export const mapStateToProps = createSelector(
   partialRight(getFieldState, {}),
   ({ blur, error, focus, value }) => ({
     error,
-    hasBlur: blur && !error,
+    hasBlur: blur && value && !error,
     hasFocus: focus,
     value,
   })

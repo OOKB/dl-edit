@@ -1,5 +1,5 @@
-import { flow, partial } from 'lodash'
-import { map, orderBy, pick } from 'lodash/fp'
+import { flow, partial, property } from 'lodash'
+import { add, eq, map, orderBy, pick, size, split } from 'lodash/fp'
 import { callWith, replaceField } from 'cape-lodash'
 import {
   clear, clearError, error, fieldValue, meta, onBlur, saved, saveProgress,
@@ -14,7 +14,7 @@ import { omitFile } from '../components/FileUpload/dropZoneUtils'
 import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
 import * as firebase from '../fire'
 import { entitySet, entityUpdate } from '../fire/util'
-import { selectItems } from './items'
+import { findItemFromFile } from './items'
 
 const { storage } = firebase
 
@@ -56,15 +56,25 @@ export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
 }
 export const invalidType = ({ fileFormat }) =>
   error(collectionId, `Invalid file type. Expected ${ACCEPT_FILE_TYPE}, got ${fileFormat}.`)
+export const invalidDots = dots =>
+  error(collectionId, `The file name must have exactly 1 dot, found ${dots}.`)
+// Select previous file selector error.
 export const getError = fieldValue(collectionId, 'error')
+// The number of dots in the name.
+export const getDotCount = flow(property('name'), split('.'), size, add(-1))
 // Upload a file.
 export const handleUpload = file => (dispatch, getState) => {
   const state = getState()
+  const dots = getDotCount(file)
   if (!file.isAccepted) {
     dispatch(invalidType(file))
+  } else if (dots !== 1) {
+    dispatch(invalidDots(dots))
   } else if (getError(state)) {
     dispatch(clearError(collectionId))
   }
+  const item = findItemFromFile(state, file)
+  console.log('item', item)
   dispatch(onBlur(collectionId, omitFile(file)))
   // clearFileSelect(dispatch)
   const agent = selectUser(state)
