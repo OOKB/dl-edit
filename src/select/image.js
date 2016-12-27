@@ -1,6 +1,6 @@
-import { flow, partial, property } from 'lodash'
-import { add, map, orderBy, pick, size, split } from 'lodash/fp'
-import { callWith, replaceField } from 'cape-lodash'
+import { flow, partial } from 'lodash'
+import { add, get, map, orderBy, pick, size, split } from 'lodash/fp'
+import { callWith, replaceField, set, setField, setKeyVal } from 'cape-lodash'
 import { createSelector } from 'reselect'
 import { getSelect, structuredSelector } from 'cape-select'
 import {
@@ -13,10 +13,9 @@ import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
 import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
 import * as firebase from '../fire'
-import { entitySet, entityUpdate } from '../fire/util'
 import { getIdFromFile, selectItems } from './items'
 
-const { storage } = firebase
+const { save, storage, update } = firebase
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
@@ -33,17 +32,23 @@ export const onComplete = (dispatch, { id, fileName, type }) => () => {
   const url = CDN_URL + fileName
   dispatch(saved(collectionId, { id, value: url }))
   loadImage(getImgSrc(url), () => clearFileSelect(dispatch))
-  entityUpdate(firebase, { id, type, url })
+  update({ id, type, url })
   // console.log('done', getFileUrl(fileName))
 }
-
+export const getSha1 = get('contentSha1')
+export const createFileEntity = agent => flow(
+  omitFile,
+  setField('id', getSha1),
+  setKeyVal('type', 'MediaObject'),
+  setKeyVal('agent', agent)
+)
 export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
   const { contentSha1, fileName } = fileInfo
   const entity = { ...fileInfo, agent, id: contentSha1, type: 'MediaObject' }
   loadImageUrl(file, console.error, (imageInfo) => {
-    if (!imageInfo) return entitySet(firebase, entity)
-    const { dataUrl, ...size } = imageInfo
-    entitySet(firebase, { ...entity, ...size })
+    if (!imageInfo) return save(entity)
+    const { dataUrl, ...sizes } = imageInfo
+    save({ ...entity, ...sizes })
     if (dataUrl) dispatch(meta(collectionId, imageInfo))
     return undefined
   })
@@ -61,23 +66,40 @@ export const invalidDots = dots =>
 // Select previous file selector error.
 export const getError = fieldValue(collectionId, 'error')
 // The number of dots in the name.
-export const getDotCount = flow(property('name'), split('.'), size, add(-1))
+export const getDotCount = flow(get('name'), split('.'), size, add(-1))
+export const blurSelector = partial(onBlur, collectionId)
+export const blurSelectorOmitFile = flow(omitFile, blurSelector)
+
+export const selectImages = entityTypeSelector('MediaObject')
+export const findImage = getSelect(
+  selectImages,
+  fieldValue(collectionId, 'value.contentSha1'),
+)
+
+export const ensureFileEntity = (dispatch, getState) => (file) => {
+  const state = getState()
+  const entity = selectImages(state)[file.contentSha1]
+  if (entity) return flow(set(file, 'hasEntity', true), blurSelectorOmitFile, dispatch)
+  const agent = selectUser(state)
+  save(createFileEntity(agent)(file))
+  return file
+}
 // Upload a file.
 export const handleUpload = file => (dispatch, getState) => {
   const state = getState()
   const dots = getDotCount(file)
   if (!file.isAccepted) {
-    dispatch(invalidType(file))
+    return dispatch(invalidType(file))
   } else if (dots !== 1) {
-    dispatch(invalidDots(dots))
+    return dispatch(invalidDots(dots))
   } else if (getError(state)) {
     dispatch(clearError(collectionId))
   }
-  dispatch(onBlur(collectionId, omitFile(file)))
+  dispatch(blurSelectorOmitFile(file))
   // clearFileSelect(dispatch)
-  const agent = selectUser(state)
+  loadSha(file, ensureFileEntity(dispatch, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
-  console.log(file)
+  // console.log(file)
   return undefined
 }
 export const findItemFromFile = getSelect(
@@ -90,7 +112,7 @@ export const getImg = flow(
   replaceField('url', getImgSrc)
 )
 export const getImages = createSelector(
-  entityTypeSelector('MediaObject'),
+  selectImages,
   flow(
     map(getImg),
     orderBy('dateCreated', 'desc'),

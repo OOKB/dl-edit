@@ -1,5 +1,7 @@
+import { partial } from 'lodash'
 import firebase from 'firebase'
 import { firebase as config } from '../config'
+import { entitySet, entityUpdate } from './util'
 
 firebase.initializeApp(config)
 
@@ -18,3 +20,6 @@ export const baseFileUrl = 'https://storage.googleapis.com'
 export function getFileUrl(fileName) {
   return [baseFileUrl, config.storageBucket, fileName].join('/')
 }
+
+export const save = partial(entitySet, { entity, TIMESTAMP })
+export const update = partial(entityUpdate, { entity, TIMESTAMP })

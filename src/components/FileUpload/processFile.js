@@ -1,7 +1,7 @@
 import sha1Hash from 'simple-sha1'
-import { flow, partial } from 'lodash'
+import { flow } from 'lodash'
 import { at, join } from 'lodash/fp'
-import { set, setField } from 'cape-lodash'
+import { setKey, setField } from 'cape-lodash'
 
 /* global window */
 
@@ -11,7 +11,7 @@ export const setFileName = setField('fileName', getFileName)
 export function loadSha(file, next) {
   const reader = new window.FileReader()
   reader.onloadend = () => sha1Hash(reader.result, flow(
-    partial(set, file, 'contentSha1'), setFileName, next
+    setKey('contentSha1', file), setFileName, next
   ))
   reader.readAsArrayBuffer(file.file)
 }

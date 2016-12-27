@@ -16,7 +16,7 @@ function Image({ dateCreated, name, url }) {
 Image.propTypes = {
   dateCreated: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
 }
 
 function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
