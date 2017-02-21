@@ -1,11 +1,11 @@
 import React from 'react'
-// import css from '../style'
+import css from '../style'
 import Page from './Page'
 
 function AppEl() {
   return (
     <Page className="App">
-      <p>hi</p>
+      <p style={css('textCenter')}>Delaney and Long: Admin section</p>
     </Page>
   )
 }
