@@ -5,7 +5,7 @@ import Icon from './Icon'
 import ItemEdit from './ItemEdit'
 import Field from './Editable/FieldWrapper'
 
-function BasicEdit({ createItem, fieldInfo, items }) {
+function HomeDrawerPg({ createItem, fieldInfo, items }) {
   return (
     <Page>
       <h1>Edit home drawer</h1>
@@ -19,7 +19,7 @@ function BasicEdit({ createItem, fieldInfo, items }) {
     </Page>
   )
 }
-BasicEdit.defaultProps = {
+HomeDrawerPg.defaultProps = {
   fieldInfo: {
     emptyText: 'Add Drawer',
     icon: { className: 'light-gray', symbol: 'pencil' },
@@ -29,11 +29,11 @@ BasicEdit.defaultProps = {
     // validate
   },
 }
-BasicEdit.propTypes = {
+HomeDrawerPg.propTypes = {
   createItem: PropTypes.func.isRequired,
   fieldInfo: PropTypes.shape({
     emptyText: PropTypes.string,
   }),
   items: PropTypes.objectOf(PropTypes.object),
 }
-export default BasicEdit
+export default HomeDrawerPg
