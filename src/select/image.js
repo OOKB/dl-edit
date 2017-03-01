@@ -12,8 +12,8 @@ import { selectUser } from 'cape-redux-auth'
 import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
 import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
-import * as firebase from '../fire'
 import { getIdFromFile, selectItems } from './items'
+import { firebase } from '../redux/configureStore'
 
 const { save, storage, update } = firebase
 

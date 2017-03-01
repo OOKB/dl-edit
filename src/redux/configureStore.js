@@ -3,16 +3,18 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from 'cape-redux-reducer'
 import { createSizeAction, createRemAction, listenResize } from 'redux-windowsize'
+import initializeFirebase, { fireMiddleware, reduxFirebase } from 'cape-firebase'
 
 import {
   getInitState,
   historyMiddleware,
   syncHistoryWithStore,
 } from 'redux-history-sync'
+import { entities, firebaseConfig } from '../config'
 
-import * as firebase from '../fire'
-import fireMiddleware from '../fire/middleware'
-import storeListener from '../fire/storeListener'
+export const firebase = initializeFirebase(firebaseConfig)
+// Build func to listen for firebase changes and dispatch to redux.
+const storeListener = reduxFirebase(entities)
 
 /* global window */
 
