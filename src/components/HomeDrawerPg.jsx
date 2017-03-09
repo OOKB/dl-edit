@@ -3,7 +3,7 @@ import { map } from 'lodash'
 import Page from './Page'
 import Icon from './Icon'
 import ItemEdit from './ItemEdit'
-import Field from './Editable/FieldWrapper'
+// import Field from './Editable/FieldWrapper'
 
 function HomeDrawerPg({ createItem, fieldInfo, items }) {
   return (
@@ -13,7 +13,7 @@ function HomeDrawerPg({ createItem, fieldInfo, items }) {
         {map(items, ItemEdit)}
         <li>
           <Icon symbol="plus" className="fa-li light-gray pointer fs1" />
-          <Field {...fieldInfo} onSubmit={createItem} />
+          <button onClick={createItem}>{fieldInfo.emptyText}</button>
         </li>
       </ul>
     </Page>

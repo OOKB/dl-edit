@@ -1,8 +1,13 @@
 import home from './App'
-import { ImageUpload as image, HomeDrawer as drawer } from './connected'
+import {
+  DrawerEdit as drawerEdit,
+  HomeDrawer as drawer,
+  ImageUpload as image,
+} from './connected'
 
 export {
   home,
   drawer,
+  drawerEdit,
   image,
 }
