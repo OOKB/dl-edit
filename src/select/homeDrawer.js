@@ -35,15 +35,13 @@ export function createItem() {
 const getEntityId = routeParam('id')
 const selectEntity = getSelect(drawerEntity, getEntityId)
 
-export function drawerEdit(state) {
-  return {
-    entity: selectEntity(state),
-    fields: drawerFields,
-    title: 'Drawer Editor',
-    prefix: HOME_DRAWER,
-    id: getEntityId,
-  }
-}
+export const drawerEdit = structuredSelector({
+  entity: selectEntity,
+  fields: drawerFields,
+  title: 'Drawer Editor',
+  prefix: HOME_DRAWER,
+  id: getEntityId,
+})
 export const drawerActions = {
   createItem,
 }

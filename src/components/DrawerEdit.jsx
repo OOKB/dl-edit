@@ -3,12 +3,13 @@ import React, { PropTypes } from 'react'
 import Page from './Page'
 import Fields from './Editable/Fields'
 
-function EntityEdit({ title, ...props }) {
+function EntityEdit({ id, title, ...props }) {
   console.log(props)
   return (
     <Page id="entity-edit">
-      <h1>{title}</h1>
-      <Fields {...props} />
+      {title && <h1>{title}</h1>}
+      {id && <p>ID: {id}</p>}
+      {props.entity && <Fields {...props} />}
     </Page>
   )
 }

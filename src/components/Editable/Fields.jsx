@@ -23,8 +23,10 @@ function Fields({ entity, fields, prefix, title }) {
 }
 
 Fields.propTypes = {
-  entity: PropTypes.object.isRequired,
-  fields: PropTypes.array.isRequired,
+  entity: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+  fields: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   prefix: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 }
