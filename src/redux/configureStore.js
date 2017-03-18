@@ -20,7 +20,7 @@ const storeListener = reduxFirebase(entities)
 
 const middleware = [
   historyMiddleware(window.history),
-  fireMiddleware(firebase),
+  fireMiddleware(firebase, entities),
   // socket,
   // cookieMiddleware,
   thunk,
