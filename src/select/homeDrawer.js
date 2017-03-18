@@ -39,7 +39,7 @@ export const drawerEdit = structuredSelector({
   entity: selectEntity,
   fields: drawerFields,
   title: 'Drawer Editor',
-  prefix: HOME_DRAWER,
+  entityType: HOME_DRAWER,
   id: getEntityId,
 })
 export const drawerActions = {
