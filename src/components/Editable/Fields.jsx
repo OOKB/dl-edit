@@ -27,7 +27,7 @@ Fields.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   fields: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  prefix: PropTypes.string.isRequired,
+  prefix: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
 }
 Fields.defaultProps = {

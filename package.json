@@ -1,7 +1,7 @@
 {
   "name": "dl-edit",
   "homepage": "http://edit.delanyandlong.com",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "devDependencies": {
     "babel-plugin-lodash": "^3.2.10",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "attr-accept": "^1.1.0",
-    "cape-firebase": "cape-io/cape-firebase",
+    "cape-firebase": "^0.0.8",
     "cape-lodash": "^1.11.0",
     "cape-redux": "^3.1.0",
     "cape-redux-auth": "^4.0.0",

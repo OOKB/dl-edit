@@ -1215,15 +1215,18 @@ caniuse-db@^1.0.30000539, caniuse-db@^1.0.30000554:
   version "1.0.30000597"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000597.tgz#b52e6cbe9dc83669affb98501629feaee1af6588"
 
-cape-firebase@cape-io/cape-firebase:
-  version "0.0.1"
-  resolved "https://codeload.github.com/cape-io/cape-firebase/tar.gz/bfbf6e2b8e2b06db4d63d2e134949a6d8b8920b0"
+cape-firebase@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.0.8.tgz#1c0b210e73da58064fddd84fac1dfec8e20698bf"
   dependencies:
     cape-lodash "^1.11.0"
+    cape-redux "^3.1.0"
     cape-redux-auth "^4.0.0"
     cape-redux-reducer "^3.6.0"
+    cape-select "^2.4.0"
     firebase "^3.6.9"
     lodash "^4.17.4"
+    redux-field "^4.4.1"
     redux-graph "^2.10.0"
 
 cape-lodash@^1.10.0, cape-lodash@^1.11.0, cape-lodash@^1.7.0, cape-lodash@^1.8.0, cape-lodash@^1.9.1:
