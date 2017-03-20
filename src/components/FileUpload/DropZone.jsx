@@ -10,11 +10,16 @@ const styles = {
 
 // Should only provide drop functionality. Nothing more. Use Uploading component to show progress.
 
-function DropZone({ hasFocus, message, onSelect, style, ...rest }) {
+function DropZone({ hasFocus, message, onDragEnter, onDragLeave, onDragOver, onSelect, style }) {
   const inlineStyle = hasFocus ? styles.onHover : styles.base
-  // console.log(rest)
   return (
-    <div {...rest} style={{ ...inlineStyle, ...style }} onDrop={onSelect}>
+    <div
+      style={{ ...inlineStyle, ...style }}
+      onDragEnter={onDragEnter}
+      onDragLeave={onDragLeave}
+      onDragOver={onDragOver}
+      onDrop={onSelect}
+    >
       <p>{message}</p>
       {hasFocus && <p>Drop it</p>}
     </div>
@@ -23,11 +28,11 @@ function DropZone({ hasFocus, message, onSelect, style, ...rest }) {
 
 DropZone.propTypes = {
   hasFocus: PropTypes.bool,
-  id: PropTypes.string,
+  // id: PropTypes.string,
   onDragEnter: PropTypes.func,
   onDragLeave: PropTypes.func,
   onDragOver: PropTypes.func,
-  onDrop: PropTypes.func,
+  // onDrop: PropTypes.func,
   onSelect: PropTypes.func,
   message: PropTypes.string.isRequired,
   style: PropTypes.object,

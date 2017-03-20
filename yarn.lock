@@ -1215,9 +1215,9 @@ caniuse-db@^1.0.30000539, caniuse-db@^1.0.30000554:
   version "1.0.30000597"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000597.tgz#b52e6cbe9dc83669affb98501629feaee1af6588"
 
-cape-firebase@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.0.8.tgz#1c0b210e73da58064fddd84fac1dfec8e20698bf"
+cape-firebase@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.0.9.tgz#c2aafc8c5deba1dab948d8f1f03509a719c37057"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"

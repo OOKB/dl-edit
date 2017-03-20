@@ -1,4 +1,4 @@
-// import { partial } from 'lodash'
+import { sortBy } from 'lodash'
 import { entityTypeSelector } from 'redux-graph'
 import { getSelect, structuredSelector } from 'cape-select'
 import { saveEntity } from 'cape-firebase'
@@ -6,6 +6,7 @@ import { createHistory } from 'redux-history-sync'
 // import { open } from 'redux-field'
 import { HOME_DRAWER } from '../config'
 import { routeParam } from '../redux/routing'
+import { ACCEPT_FILE_TYPE } from './image'
 
 export const drawerEntity = entityTypeSelector(HOME_DRAWER)
 
@@ -18,7 +19,15 @@ export const title = {
   type: 'text',
   validators: ['isRequired'],
 }
+export const image = {
+  accept: ACCEPT_FILE_TYPE,
+  id: 'image',
+  name: 'Image',
+  position: 1,
+  type: 'file',
+}
 export const drawerFields = {
+  image,
   title,
 }
 export const drawerSelector = structuredSelector({
@@ -37,7 +46,7 @@ const selectEntity = getSelect(drawerEntity, getEntityId)
 
 export const drawerEdit = structuredSelector({
   entity: selectEntity,
-  fields: drawerFields,
+  fields: sortBy(drawerFields, 'position'),
   title: 'Drawer Editor',
   entityType: HOME_DRAWER,
   id: getEntityId,
