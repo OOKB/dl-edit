@@ -14,7 +14,7 @@ function Fields({ entity, fields, prefix, title }) {
           <li key={field.id}>
             {field.type === 'file' && <FileSelect
               {...field}
-              collectionId={prefix[0]}
+              collectionId={field.collectionId}
               initialValue={entity[field.id]}
               fieldId={prefix[1]}
               prefix={prefix}
