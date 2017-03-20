@@ -27,6 +27,8 @@ FileSelect.propTypes = {
   error: PropTypes.string,
   hasBlur: PropTypes.bool,
   id: PropTypes.string,
+  isRequired: PropTypes.bool,
+  name: React.PropTypes.string,
   value: PropTypes.shape({
     name: React.PropTypes.string,
   }),
