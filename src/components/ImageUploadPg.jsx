@@ -23,10 +23,11 @@ function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (
     <Page className="App">
       <div style={css("mw8 mlrauto textCenter")}>
-      <h1>Upload an image</h1>
-      <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
-      {item && <Item {...item} />}
-      {images && map(images, (img, key) => <Image key={key} {...img} />)}
+        <h1>Upload an image</h1>
+        <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
+        {item && <Item {...item} />}
+        {images && map(images, (img, key) => <Image key={key} {...img} />)}
+      </div>
     </Page>
   )
 }
