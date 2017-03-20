@@ -11,7 +11,7 @@ function FileSelect({ error, hasBlur, value, ...props }) {
   return (
     <div>
       {error && <p>{error}</p>}
-      {hasBlur && <p className="uploading">Uploading</p>}
+      {hasBlur && <p className="uploading">Image Selected</p>}
       {!hasBlur &&
         <div>
           <DropZone {...props} onSelect={onSelect} />
