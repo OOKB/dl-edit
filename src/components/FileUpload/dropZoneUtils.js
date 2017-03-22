@@ -91,6 +91,8 @@ export const handleBlur = ({ multiple, onBlur }) => (files) => {
 function selectBlur(props) {
   // We should do some validation here instead of the blur?
   if (isFunction(props.onSelect)) {
+    // I think the thing is to just send the action creator props?
+    // Only issue is that this is happening on every render?
     return props.onSelect(props)
   }
   return (isFunction(props.onBlur) && handleBlur(props)) || identity

@@ -3,9 +3,7 @@ import { add, get, map, orderBy, pick, size, split } from 'lodash/fp'
 import { callWith, replaceField, set, setField, setKeyVal } from 'cape-lodash'
 import { createSelector } from 'reselect'
 import { getSelect, structuredSelector } from 'cape-select'
-import {
-  clear, clearError, error, fieldValue, meta, onBlur, saved, saveProgress,
-} from 'redux-field'
+import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
 
@@ -59,16 +57,16 @@ export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
   )
   return uploadTask
 }
-export const invalidType = ({ fileFormat }) =>
-  error(collectionId, `Invalid file type. Expected ${ACCEPT_FILE_TYPE}, got ${fileFormat}.`)
-export const invalidDots = dots =>
-  error(collectionId, `The file name must have exactly 1 dot, found ${dots}.`)
+
+
 // Select previous file selector error.
 export const getError = fieldValue(collectionId, 'error')
 // The number of dots in the name.
 export const getDotCount = flow(get('name'), split('.'), size, add(-1))
-export const blurSelector = partial(onBlur, collectionId)
-export const blurSelectorOmitFile = flow(omitFile, blurSelector)
+
+export function blurSelectorOmitFile({ onBlur }, file) {
+  return onBlur(omitFile(file))
+}
 
 export const selectImages = entityTypeSelector('MediaObject')
 export const findImage = getSelect(
@@ -84,37 +82,47 @@ export const ensureFileEntity = (dispatch, getState) => (file) => {
   save(createFileEntity(agent)(file))
   return file
 }
-export function errorCheck(file, dispatch, getState) {
-  const state = getState()
-  const dots = getDotCount(file)
+export const invalidTypeMsg = ({ fileFormat }) =>
+  `Invalid file type. Expected ${ACCEPT_FILE_TYPE}, got ${fileFormat}.`
+export const invalidDotsMsg = dots =>
+  `The file name must have exactly 1 dot, found ${dots}.`
+
+export function errorCheck(props, file) {
+  const { clearError, error, onError } = props
+  console.log('errorCheck props', props)
   if (!file.isAccepted) {
-    return dispatch(invalidType(file))
-  } else if (dots !== 1) {
-    return dispatch(invalidDots(dots))
-  } else if (getError(state)) {
-    dispatch(clearError(collectionId))
+    return onError(invalidTypeMsg(file))
+  }
+  const dots = getDotCount(file)
+  if (dots !== 1) {
+    return onError(invalidDotsMsg(dots))
+  }
+  if (error) {
+    console.log('clearError')
+    clearError()
   }
   return false
 }
-export const handleSelect = file => (dispatch, getState) => {
-  console.log(file)
-  const hasError = errorCheck(file, dispatch, getState)
+
+// FILE UPLOAD
+export const handleSelect = props => (dispatch, getState) => (file) => {
+  console.log('file', file)
+  const hasError = errorCheck(props, file)
   console.log(hasError)
   if (hasError) return hasError
-  // clearFileSelect(dispatch)
+  // blurSelectorOmitFile(props, file)
   // loadSha(file, ensureFileEntity(dispatch, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
   // console.log(file)
   return undefined
 }
-// A file has been selected. Upload a file.
-export const handleUpload = file => (dispatch, getState) => {
-  const hasError = errorCheck(file, dispatch, getState)
-  console.log(hasError)
-  if (hasError) return hasError
-  dispatch(blurSelectorOmitFile(file))
+
+// A file has been selected. Upload a file. First func is props. Use that instead of thunk.
+export const handleUpload = props => (file) => {
+  const hasError = errorCheck(props, file)
+  blurSelectorOmitFile(props, file)
   // clearFileSelect(dispatch)
-  loadSha(file, ensureFileEntity(dispatch, getState))
+  // loadSha(file, ensureFileEntity(dispatch, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
   // console.log(file)
   return undefined
