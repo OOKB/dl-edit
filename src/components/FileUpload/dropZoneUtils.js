@@ -88,12 +88,19 @@ export const handleBlur = ({ multiple, onBlur }) => (files) => {
 }
 // export const debugReturn = (item) => { console.log(item); return item }
 
+function selectBlur(props) {
+  // We should do some validation here instead of the blur?
+  if (isFunction(props.onSelect)) {
+    return props.onSelect(props)
+  }
+  return (isFunction(props.onBlur) && handleBlur(props)) || identity
+}
 // Trying to provide helpful but limited defaults.
 export const handleSelect = props => flow(
   handleDrop,
   mapWithKey(getFile(props)),
   props.multiple ? identity : getFirst,
-  props.onSelect || (isFunction(props.onBlur) && handleBlur(props)) || identity
+  selectBlur(props)
 )
 
 export function humanFileSize(bytes) {

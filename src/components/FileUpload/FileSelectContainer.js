@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { partialRight } from 'lodash'
 // import { structuredSelector } from 'cape-select'
-import { onBlur, onDragEnter, onDragLeave } from 'redux-field'
+import { error as onError, onBlur, onDragEnter, onDragLeave } from 'redux-field'
 import { createConnect, getFieldState } from '../capeField'
 import Component from './FileSelect'
 
@@ -19,6 +19,7 @@ const actions = {
   onBlur,
   onDragEnter,
   onDragLeave,
+  onError,
 }
 
 export default createConnect(mapStateToProps, actions)(Component)

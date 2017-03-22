@@ -78,14 +78,13 @@ export const findImage = getSelect(
 
 export const ensureFileEntity = (dispatch, getState) => (file) => {
   const state = getState()
-  const entity = selectImages(state)[file.contentSha1]
+  const entity = get(file.contentSha1, selectImages(state))
   if (entity) return flow(set(file, 'hasEntity', true), blurSelectorOmitFile, dispatch)
   const agent = selectUser(state)
   save(createFileEntity(agent)(file))
   return file
 }
-// Upload a file.
-export const handleUpload = file => (dispatch, getState) => {
+export function errorCheck(file, dispatch, getState) {
   const state = getState()
   const dots = getDotCount(file)
   if (!file.isAccepted) {
@@ -95,6 +94,24 @@ export const handleUpload = file => (dispatch, getState) => {
   } else if (getError(state)) {
     dispatch(clearError(collectionId))
   }
+  return false
+}
+export const handleSelect = file => (dispatch, getState) => {
+  console.log(file)
+  const hasError = errorCheck(file, dispatch, getState)
+  console.log(hasError)
+  if (hasError) return hasError
+  // clearFileSelect(dispatch)
+  // loadSha(file, ensureFileEntity(dispatch, getState))
+  // if (file) loadSha(file, uploadImage(dispatch, agent))
+  // console.log(file)
+  return undefined
+}
+// A file has been selected. Upload a file.
+export const handleUpload = file => (dispatch, getState) => {
+  const hasError = errorCheck(file, dispatch, getState)
+  console.log(hasError)
+  if (hasError) return hasError
   dispatch(blurSelectorOmitFile(file))
   // clearFileSelect(dispatch)
   loadSha(file, ensureFileEntity(dispatch, getState))
@@ -111,6 +128,7 @@ export const getImg = flow(
   pick(['dateCreated', 'name', 'url']),
   replaceField('url', getImgSrc)
 )
+// Specific to item file upload page.
 export const getImages = createSelector(
   selectImages,
   flow(

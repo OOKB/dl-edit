@@ -3694,13 +3694,13 @@ lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
 
-"lodash@>=3.5 <5", "lodash@^ 4.17.2", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.16.4, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
-
-lodash@^4.17.4:
+"lodash@>=3.5 <5", "lodash@^ 4.17.2", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.16.4, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
+lodash@^4.17.2:
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -4852,7 +4852,20 @@ redux-field@^4.4.1:
     reselect "^2.5.4"
     seamless-immutable "^6.1.3"
 
-redux-graph@^2.10.0:
+redux-field@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/redux-field/-/redux-field-4.5.0.tgz#feff5f41a1603bb47c89c5a7b00d465dc9ee5573"
+  dependencies:
+    cape-lodash "^1.10.0"
+    cape-redux "^3.1.0"
+    cape-select "^2.4.0"
+    lodash "^ 4.17.2"
+    react-redux "^5.0.1"
+    redux "^3.6.0"
+    reselect "^2.5.4"
+    seamless-immutable "^6.1.3"
+
+redux-graph@^2.10.0, redux-graph@^2.7.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.10.0.tgz#36906793aa31e676fd117a3a8d0975dd210ff665"
   dependencies:
@@ -4863,7 +4876,7 @@ redux-graph@^2.10.0:
     redux "^3.6.0"
     reselect "^2.5.4"
 
-redux-graph@^2.7.0, redux-graph@^2.9.0:
+redux-graph@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.9.0.tgz#287301f95ad58499902ea6eda7f0a752d4f2acc0"
   dependencies:
