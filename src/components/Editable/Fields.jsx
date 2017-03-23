@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
-import { flow, map } from 'lodash'
+import { map } from 'lodash'
 import { handleSelect } from '../../select/image'
 import css from '../../style'
 import Field from './Field'
 import FileSelect from '../FileUpload/FileSelectContainer'
 
-function Fields({ dispatch, entity, fields, prefix, title }) {
+function Fields({ entity, fields, prefix, title }) {
   // console.log(entity)
   return (
     <div>
@@ -18,7 +18,7 @@ function Fields({ dispatch, entity, fields, prefix, title }) {
               collectionId={field.collectionId}
               initialValue={entity[field.id]}
               fieldId={prefix[1]}
-              onSelect={flow(handleSelect, dispatch)}
+              onSelect={handleSelect}
               prefix={prefix}
             />}
             {field.type !== 'file' && <Field

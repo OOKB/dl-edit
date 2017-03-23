@@ -105,7 +105,7 @@ export function errorCheck(props, file) {
 }
 
 // FILE UPLOAD
-export const handleSelect = props => (dispatch, getState) => (file) => {
+export const handleSelect = props => (file) => {
   console.log('file', file)
   const hasError = errorCheck(props, file)
   console.log(hasError)

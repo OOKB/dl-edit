@@ -6,7 +6,8 @@ import DropZone from './DropZone'
 import FileInput from './FileInput'
 import FileDetails from './FileDetails'
 
-function FileSelect({ error, hasBlur, id, isRequired, name, value, ...props }) {
+function FileSelect(props) {
+  const { error, hasBlur, id, isRequired, name, value, ...rest } = props
   const onSelect = handleSelect(props)
   return (
     <div>
@@ -15,8 +16,8 @@ function FileSelect({ error, hasBlur, id, isRequired, name, value, ...props }) {
       {hasBlur && <p className="uploading">Image Selected</p>}
       {!hasBlur &&
         <div>
-          <DropZone {...props} onSelect={onSelect} />
-          <FileInput {...props} onSelect={onSelect} />
+          <DropZone {...rest} onSelect={onSelect} />
+          <FileInput {...rest} onSelect={onSelect} />
         </div>
       }
       {value && <FileDetails {...value} />}
