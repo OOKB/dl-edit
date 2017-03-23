@@ -29,9 +29,10 @@ FileSelect.propTypes = {
   hasBlur: PropTypes.bool,
   id: PropTypes.string,
   isRequired: PropTypes.bool,
-  name: React.PropTypes.string,
+  name: PropTypes.string,
+  onSelect: PropTypes.func,
   value: PropTypes.shape({
-    name: React.PropTypes.string,
+    name: PropTypes.string,
   }),
 }
 export default FileSelect
