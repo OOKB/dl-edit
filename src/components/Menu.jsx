@@ -7,7 +7,7 @@ function Menu({ activeId, links, actions }) {
   function isActive({ id }) { return activeId === id }
   function getAction({ action }) { return actions[action] }
   return (
-    <ul className="menu" style={css('lsNone m0 p1 flex')}>
+    <ul className="menu" style={css('lsNone m0 p0')}>
       {map(links, link => (
         <NavItem {...link} key={link.id} isActive={isActive(link)} action={getAction(link)} />
       ))}

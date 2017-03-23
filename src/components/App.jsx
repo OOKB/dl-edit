@@ -5,7 +5,7 @@ import Page from './Page'
 function AppEl() {
   return (
     <Page className="App">
-      <p style={css('textCenter')}>Delaney and Long: Admin section</p>
+      <p style={css('mt4 mb4 textCenter')}>Delaney and Long: Admin section</p>
     </Page>
   )
 }

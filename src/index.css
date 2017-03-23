@@ -23,12 +23,13 @@ html {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
+  position: relative;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: system, -apple-system, BlinkMacSystemFont, 'Balto', Balto, Roboto, "Droid Sans", "Segoe UI", Segoe, "Liberation Sans", "Nimbus Sans L", 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: system, -apple-system, BlinkMacSystemFont, Roboto, "Droid Sans", "Segoe UI", Segoe, "Liberation Sans", "Nimbus Sans L", 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 html,
@@ -52,43 +53,91 @@ img {
   height: auto;
 }
 
-a.highlighted {
-  color: inherit;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  transition: all 300ms;
-  position: relative;
-  display: inline-block;
-  transition: all 400ms ease;
+/********* color modules **********/
+.bg-pink               { background-color: rgba(236,064,121,1); }
+.bg-brown              { background-color: rgba(047,041,038,1); }
+.bg-gray               { background-color: rgba(132,132,120,1); }
+.bg-darkgray           { background-color: rgba(096,103,103,1); }
+.bg-lightgray          { background-color: rgba(194,211,186,1); }
+.bg-red                { background-color: rgba(183,080,081,1); }
+.bg-orange             { background-color: rgba(195,115,099,1); }
+.bg-yellow             { background-color: rgba(197,192,101,1); }
+.bg-green              { background-color: rgba(140,165,115,1); }
+.bg-blue               { background-color: rgba(157,178,176,1); }
+.bg-purple             { background-color: rgba(174,139,164,1); }
+.bg-black              { background-color: rgba(000,000,000,1); }
+.bg-white              { background-color: rgba(255,255,255,1); }
+
+.pink                  { color: rgba(236,064,121,1); }
+.brown                 { color: rgba(047,041,038,1); }
+.gray                  { color: rgba(132,132,120,1); }
+.darkgray              { color: rgba(096,103,103,1); }
+.lightgray             { color: rgba(194,211,186,1); }
+.red                   { color: rgba(183,080,081,1); }
+.orange                { color: rgba(195,115,099,1); }
+.yellow                { color: rgba(197,192,101,1); }
+.green                 { color: rgba(140,165,115,1); }
+.blue                  { color: rgba(157,178,176,1); }
+.purple                { color: rgba(174,139,164,1); }
+.black                 { color: rgba(000,000,000,1); }
+.white                 { color: rgba(255,255,255,1); }
+
+.border-pink           { border-color: rgba(236,064,121,1); }
+.border-brown          { border-color: rgba(047,041,038,1); }
+.border-gray           { border-color: rgba(132,132,120,1); }
+.border-darkgray       { border-color: rgba(096,103,103,1); }
+.border-lightgray      { border-color: rgba(194,211,186,1); }
+.border-red            { border-color: rgba(183,080,081,1); }
+.border-orange         { border-color: rgba(195,115,099,1); }
+.border-yellow         { border-color: rgba(197,192,101,1); }
+.border-green          { border-color: rgba(140,165,115,1); }
+.border-blue           { border-color: rgba(157,178,176,1); }
+.border-purple         { border-color: rgba(174,139,164,1); }
+.border-black          { border-color: rgba(000,000,000,1); }
+.border-white          { border-color: rgba(255,255,255,1); }
+
+/*** okay, some specific to this layout stuff ***/
+
+html,
+body,
+body > div,
+body > div > div  {
+  height: 100%;
 }
 
-a.highlighted * {
-  transition: all 400ms ease;
+page {
+  display: flex;
+  padding-top: 3em;
+  flex-wrap: wrap;
+  min-height: 100%;
 }
 
-a.highlighted .text {
-  position: relative;
+header .stripe {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+}
+
+header {
+  width: 20%;
+  min-height: 100%;
+}
+
+main {
+  width: 80%;
+  min-height: 100%;
+}
+
+footer {
+  width: 100%;
+}
+
+.drawers li a {
+  text-decoration: none;
   display: block;
-  z-index: 1;
-}
-
-a.highlighted .mark {
-  display:block;
-  position: absolute;
-  top: .3em;
-  left: 7%;
-  height: .9em;
-  width: 95%;
-  background-color: #fedb00;
-  z-index: 0;
-  -webkit-transform: skewX(5deg);
-  transform: skewX(5deg);
-}
-
-a.highlighted.hl2 .mark {
-  left: 5%;
-  width: 97%;
-  -webkit-transform: none;
-  transform: none;
+  padding: .75em 2em;
+  border-bottom: 1px solid;
+  margin-left: -2em;
+  margin-right: -2em;
 }

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { map } from 'lodash'
+import css from '../style'
 import Page from './Page'
 import Icon from './Icon'
 import ItemEdit from './ItemEdit'
@@ -8,11 +9,11 @@ import ItemEdit from './ItemEdit'
 function HomeDrawerPg({ createItem, fieldInfo, items }) {
   return (
     <Page>
-      <h1>Edit home drawer</h1>
-      <ul className="list-reset collections fa-ul">
+      <h1 style={css('m0 fs2')}>Edit home drawer</h1>
+      <ul className="drawers collections fa-ul" style={css('lsNone m0 p0')}>
         {map(items, ItemEdit)}
         <li>
-          <Icon symbol="plus" className="fa-li light-gray pointer fs1" />
+          <Icon symbol="plus" className="fa-li pointer fs1" />
           <button onClick={createItem}>{fieldInfo.emptyText}</button>
         </li>
       </ul>

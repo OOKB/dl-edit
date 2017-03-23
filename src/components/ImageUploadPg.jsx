@@ -22,8 +22,8 @@ Image.propTypes = {
 function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (
     <Page className="App">
-      <div style={css("mw8 mlrauto textCenter")}>
-        <h1>Upload an image</h1>
+      <h1 style={css('m0 fs1')}>Upload an image</h1>
+      <div>
         <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
         {item && <Item {...item} />}
         {images && map(images, (img, key) => <Image key={key} {...img} />)}

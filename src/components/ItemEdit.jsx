@@ -8,7 +8,7 @@ function ItemEdit({ id, title }) {
     <li key={id}>
       <Link href={`/home-drawer/${id}`} className="absolute right-0 view">
         <Icon symbol="documents" />
-        <span className="mono fs0p6 uppercase ml0p25 lightgray">{title || 'View'}</span>
+        <span className="mono fs0p6 uppercase ml0p25">{title || 'View'}</span>
       </Link>
     </li>
   )
