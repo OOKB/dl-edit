@@ -1,14 +1,17 @@
 import { connect } from 'react-redux'
 import {
-  flow, filter, get, memoize, method, omit, overArgs, partial, property,
+  flow, filter, get, isPlainObject, memoize, method, omit, overArgs, partial, property,
 } from 'lodash'
 import { at, getOr } from 'lodash/fp'
-import { mapDispatchToProps } from 'cape-redux'
+// import { mapDispatchToProps } from 'cape-redux'
 import { mapPartial, selectForm } from 'redux-field'
+import { bindActionCreators } from 'redux'
 
 // @TODO Default values needed for prefixProps? Not for now.
 // Create builder that accepts prefixProps array if required.
-
+export function mapDispatchToProps(getActions) {
+  return (dispatch, props) => ({ dispatch, ...bindActionCreators(getActions(props), dispatch) })
+}
 export const prefixProps = ['collectionId', 'fieldId']
 export const getEntityPrefix = flow(at(prefixProps), filter)
 export const getFieldState = overArgs(get, [selectForm, getEntityPrefix])
@@ -29,6 +32,6 @@ export function mergeProps(stateProps, dispatchProps, ownProps) {
   return Object.assign(props, stateProps, dispatchProps)
 }
 // modify actionObject and add our custom mergeProps onto standard redux connect().
-export const createConnect = (mapStateToProps, actionObject) => connect(
-  mapStateToProps, getActions(actionObject), mergeProps
+export const createConnect = (mapStateToProps, actions) => connect(
+  mapStateToProps, isPlainObject(actions) ? getActions(actions) : actions, mergeProps
 )

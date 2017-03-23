@@ -6,6 +6,7 @@ import { getSelect, structuredSelector } from 'cape-select'
 import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
+import { saveEntity } from 'cape-firebase'
 
 import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
@@ -13,7 +14,7 @@ import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/proce
 import { getIdFromFile, selectItems } from './items'
 import { firebase } from '../redux/configureStore'
 
-const { save, storage, update } = firebase
+const { storage, update } = firebase
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
@@ -44,9 +45,9 @@ export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
   const { contentSha1, fileName } = fileInfo
   const entity = { ...fileInfo, agent, id: contentSha1, type: 'MediaObject' }
   loadImageUrl(file, console.error, (imageInfo) => {
-    if (!imageInfo) return save(entity)
+    if (!imageInfo) return saveEntity(entity)
     const { dataUrl, ...sizes } = imageInfo
-    save({ ...entity, ...sizes })
+    saveEntity({ ...entity, ...sizes })
     if (dataUrl) dispatch(meta(collectionId, imageInfo))
     return undefined
   })
@@ -74,12 +75,13 @@ export const findImage = getSelect(
   fieldValue(collectionId, 'value.contentSha1'),
 )
 
-export const ensureFileEntity = (dispatch, getState) => (file) => {
+export const ensureFileEntity = file => (dispatch, getState) => {
   const state = getState()
   const entity = get(file.contentSha1, selectImages(state))
   if (entity) return flow(set(file, 'hasEntity', true), blurSelectorOmitFile, dispatch)
   const agent = selectUser(state)
-  save(createFileEntity(agent)(file))
+  // Save to firebase
+  dispatch(saveEntity(createFileEntity(agent)(file)))
   return file
 }
 export const invalidTypeMsg = ({ fileFormat }) =>
@@ -110,15 +112,14 @@ export const errorOrBlur = next => props => (file) => {
   return next(props, file)
 }
 // FILE UPLOAD
-export const handleSelect = errorOrBlur((props, file) => (dispatch, getState) => {
-  console.log('file', file)
-  if (file) loadSha(file, ensureFileEntity(dispatch, getState))
+export const handleSelect = errorOrBlur(({ dispatch }, file) => {
+  if (file) loadSha(file, file2 => dispatch(ensureFileEntity(file2)))
 })
 
 // A file has been selected. Upload a file. First func is props. Use that instead of thunk.
 export const handleUpload = props => (file) => {
-  const hasError = errorCheck(props, file)
-  blurSelectorOmitFile(props, file)
+  // const hasError = errorCheck(props, file)
+  // blurSelectorOmitFile(props, file)
   // clearFileSelect(dispatch)
   // loadSha(file, ensureFileEntity(dispatch, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
