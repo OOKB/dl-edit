@@ -4,13 +4,13 @@ import css from '../style'
 import LinkEl from './Link'
 
 const styles = {
-  links: css('b1 br1 p1 block fs1 textReset'),
+  links: css('bb block fs1 textReset'),
 }
 
 function NavItem({ isActive, id, ...props }) {
   return (
     <li className={classnames(id, { active: isActive })}>
-      <LinkEl internal {...props} style={styles.links} />
+      <LinkEl className="brown bg-darkgray-hover white-hover" internal {...props} style={styles.links} />
     </li>
   )
 }

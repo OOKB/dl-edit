@@ -38,12 +38,8 @@ body {
   min-width: 100%;
 }
 
-h1 { font-size: 4.235801032rem; }
-h2 { font-size: 2.617924rem; }
-h3 { font-size: 1.618rem; }
-h4 { font-size: 1rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: 2rem; }
+h2,h3,h4,h5,h6,p,ul,li,blockquote { font-size: 1rem; }
 
 p {margin:0;}
 p + p { margin-top: 1rem; }
@@ -161,10 +157,19 @@ footer {
   width: 100%;
 }
 
+header nav ul.menu {
+  margin-top: calc(5em - 2px);
+  border-top: 1px solid;
+}
+
+header nav li a,
+.drawers li a {
+  padding: .75em 2em;
+}
+
 .drawers li a {
   text-decoration: none;
   display: block;
-  padding: .75em 2em;
   border-bottom: 1px solid;
   margin-left: -2em;
   margin-right: -2em;
