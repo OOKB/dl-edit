@@ -89,7 +89,6 @@ export const invalidDotsMsg = dots =>
 
 export function errorCheck(props, file) {
   const { clearError, error, onError } = props
-  console.log('errorCheck props', props)
   if (!file.isAccepted) {
     return onError(invalidTypeMsg(file))
   }
@@ -104,18 +103,17 @@ export function errorCheck(props, file) {
   return false
 }
 
-// FILE UPLOAD
-export const handleSelect = props => (file) => {
-  console.log('file', file)
+export const errorOrBlur = next => props => (file) => {
   const hasError = errorCheck(props, file)
-  console.log(hasError)
   if (hasError) return hasError
-  // blurSelectorOmitFile(props, file)
-  // loadSha(file, ensureFileEntity(dispatch, getState))
-  // if (file) loadSha(file, uploadImage(dispatch, agent))
-  // console.log(file)
-  return undefined
+  blurSelectorOmitFile(props, file)
+  return next(props, file)
 }
+// FILE UPLOAD
+export const handleSelect = errorOrBlur((props, file) => (dispatch, getState) => {
+  console.log('file', file)
+  if (file) loadSha(file, ensureFileEntity(dispatch, getState))
+})
 
 // A file has been selected. Upload a file. First func is props. Use that instead of thunk.
 export const handleUpload = props => (file) => {

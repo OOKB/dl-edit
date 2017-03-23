@@ -21,7 +21,7 @@ export const title = {
 }
 export const image = {
   accept: ACCEPT_FILE_TYPE,
-  collectionId: 'ImageObject',
+  collectionId: 'MediaObject',
   id: 'image',
   name: 'Image',
   position: 1,

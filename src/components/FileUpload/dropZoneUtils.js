@@ -86,7 +86,7 @@ export const handleBlur = ({ multiple, onBlur }) => (files) => {
   onBlur(multiple ? withoutFile(files) : omitFile(files))
   return files
 }
-export const debugReturn = (item) => { console.log(item); return item }
+// export const debugReturn = (item) => { console.log(item); return item }
 
 function selectBlur(props) {
   // We should do some validation here instead of the blur?
@@ -102,7 +102,6 @@ export const handleSelect = props => flow(
   handleDrop,
   mapWithKey(getFile(props)),
   props.multiple ? identity : getFirst,
-  debugReturn,
   selectBlur(props)
 )
 

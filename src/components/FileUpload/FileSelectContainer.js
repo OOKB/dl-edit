@@ -7,12 +7,11 @@ import Component from './FileSelect'
 
 export const mapStateToProps = createSelector(
   partialRight(getFieldState, {}),
-  ({ blur, error, focus, value, ...rest }) => ({
+  ({ blur, error, focus, value }) => ({
     error,
     hasBlur: blur && value && !error,
     hasFocus: focus,
     value,
-    rest,
   })
 )
 

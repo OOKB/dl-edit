@@ -34,7 +34,7 @@ function Fields({ entity, fields, prefix, title }) {
 }
 
 Fields.propTypes = {
-  dispatch: PropTypes.func,
+  // dispatch: PropTypes.func,
   entity: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,
