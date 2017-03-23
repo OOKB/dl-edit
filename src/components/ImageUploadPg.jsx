@@ -23,7 +23,7 @@ function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (
     <Page>
       <h1 style={css('m0 fs2')}>Upload an image</h1>
-      <div>
+      <div className="imageZone">
         <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
         {item && <Item {...item} />}
         {images && map(images, (img, key) => <Image key={key} {...img} />)}

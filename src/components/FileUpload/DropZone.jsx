@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import css from '../../style'
 import { handleHover } from './dropZoneUtils'
 
-const baseStyle = css('bgGray pt5 pb5 pl2 pr2 m2 mlneg2 mrneg2')
+const baseStyle = css('bgGray pt5 pb5 pl2 pr2 mt2 mb2')
 const styles = {
   base: baseStyle,
   onHover: { ...baseStyle, ...css('bgWashedBlue ba bw0p125') },
@@ -19,6 +19,7 @@ function DropZone({ hasFocus, message, onDragEnter, onDragLeave, onDragOver, onS
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onSelect}
+      className="dropzone"
     >
       <p>{message}</p>
       {hasFocus && <p>Drop it</p>}

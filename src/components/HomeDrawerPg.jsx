@@ -9,7 +9,7 @@ import ItemEdit from './ItemEdit'
 function HomeDrawerPg({ createItem, fieldInfo, items }) {
   return (
     <Page>
-      <h1 style={css('m0 mb0p5 fs2')}>Edit home drawer</h1>
+      <h1 style={css('bb m0 fs2 p1 pl2 pr2')}>Edit home drawer</h1>
       <ul className="drawers collections" style={css('lsNone m0 p0')}>
         {map(items, ItemEdit)}
         <li className="gray">

@@ -10,7 +10,7 @@ function Page({ children, className, id, style }) {
       <Header />
       <main>
         <nav className="bg-lightgray"><Menu /></nav>
-        <div style={css('p2')}>
+        <div>
           {children}
         </div>
       </main>
