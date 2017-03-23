@@ -131,38 +131,28 @@ body > div > div  {
 
 page {
   display: flex;
-  padding-top: 3em;
   flex-wrap: wrap;
   min-height: 100%;
-}
-
-header .stripe {
-  position: fixed;
-  top:0;
-  left:0;
-  right:0;
-}
-
-header {
-  width: 20%;
-  min-height: 100%;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 main {
-  width: 80%;
   min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-footer {
-  width: 100%;
-}
+main nav { width: 20%; }
+main > div { width: 80%; }
 
-header nav ul.menu {
+nav .menu {
   margin-top: calc(5em - 2px);
   border-top: 1px solid;
 }
 
-header nav li a,
+nav li a,
 .drawers li a {
   padding: .75em 2em;
 }

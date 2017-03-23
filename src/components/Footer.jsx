@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
+import css from '../style'
 
 function FooterEl({ siteId }) {
   return (
-    <footer>
+    <footer className="bg-darkgray yellow" style={css('p1')}>
       {siteId && <p>{siteId}</p>}
     </footer>
   )
