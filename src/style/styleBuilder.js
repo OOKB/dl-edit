@@ -156,6 +156,8 @@ export const styles = {
   lsInline: { display: 'flex', justifyContent: 'center' },
   lsNone: { listStyle: 'none' },
   mlrauto: { marginLeft: 'auto', marginRight: 'auto' },
+  mlneg2: { marginLeft: '-2rem' },
+  mrneg2: { marginRight: '-2rem' },
   mw100p: { maxWidth: '100%' },
   mw1: { maxWidth: '1rem' },
   mw2: { maxWidth: '2rem' },
@@ -198,6 +200,7 @@ export const styles = {
   top50p,
   w50: { width: '50%' },
   w100vw: { width: '100vw' },
+  w100: { width: '100%' },
   ...buildNumSizes('zIndex', 'z'),
 }
 // Takes a className string and converts it into an object that can be sent to react style prop.

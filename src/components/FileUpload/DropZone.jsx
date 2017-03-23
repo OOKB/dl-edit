@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import css from '../../style'
 import { handleHover } from './dropZoneUtils'
 
-const baseStyle = css('bgGray mw7 p2 m2 h7')
+const baseStyle = css('bgGray pt5 pb5 pl2 pr2 m2 mlneg2 mrneg2')
 const styles = {
   base: baseStyle,
   onHover: { ...baseStyle, ...css('bgWashedBlue ba bw0p125') },

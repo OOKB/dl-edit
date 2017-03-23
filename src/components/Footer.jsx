@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react'
+import css from '../style'
 
 function FooterEl({ siteId }) {
   return (
-    <footer>
-      <p>Footer</p>
+    <footer className="bg-darkgray yellow" style={css('p1')}>
       {siteId && <p>{siteId}</p>}
     </footer>
   )
 }
 FooterEl.defaultProps = {
+  siteId: 'Built by OOKB/CAPE',
 }
 FooterEl.propTypes = {
   siteId: PropTypes.string,

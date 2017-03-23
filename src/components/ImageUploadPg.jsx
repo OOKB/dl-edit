@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { map } from 'lodash'
-// import css from '../style'
+import css from '../style'
 import Page from './Page'
 import FileSelect from './FileUpload/FileSelectContainer'
 import Item from './Item'
@@ -21,11 +21,13 @@ Image.propTypes = {
 
 function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (
-    <Page className="App">
-      <h1>Upload an image</h1>
-      <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
-      {item && <Item {...item} />}
-      {images && map(images, (img, key) => <Image key={key} {...img} />)}
+    <Page>
+      <h1 style={css('m0 fs2')}>Upload an image</h1>
+      <div>
+        <FileSelect accept={accept} collectionId={collectionId} onSelect={handleUpload} />
+        {item && <Item {...item} />}
+        {images && map(images, (img, key) => <Image key={key} {...img} />)}
+      </div>
     </Page>
   )
 }
