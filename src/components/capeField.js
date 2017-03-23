@@ -15,6 +15,7 @@ export const getFieldState = overArgs(get, [selectForm, getEntityPrefix])
 export const getFieldProp = flow(property, partial(flow, getFieldState))
 export const getFieldPropOr = flow(getOr, partial(flow, getFieldState))
 
+// Assume the actions never change for the life of component?
 export const cacheKey = flow(getEntityPrefix, method('join', '-'))
 export const createGetActions = actions => flow(
   getEntityPrefix,
