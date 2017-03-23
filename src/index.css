@@ -68,6 +68,20 @@ img {
 .bg-black              { background-color: rgba(000,000,000,1); }
 .bg-white              { background-color: rgba(255,255,255,1); }
 
+.bg-pink-hover:hover        { background-color: rgba(236,064,121,1); }
+.bg-brown-hover:hover       { background-color: rgba(047,041,038,1); }
+.bg-gray-hover:hover        { background-color: rgba(132,132,120,1); }
+.bg-darkgray-hover:hover    { background-color: rgba(096,103,103,1); }
+.bg-lightgray-hover:hover   { background-color: rgba(194,211,186,1); }
+.bg-red-hover:hover         { background-color: rgba(183,080,081,1); }
+.bg-orange-hover:hover      { background-color: rgba(195,115,099,1); }
+.bg-yellow-hover:hover      { background-color: rgba(197,192,101,1); }
+.bg-green-hover:hover       { background-color: rgba(140,165,115,1); }
+.bg-blue-hover:hover        { background-color: rgba(157,178,176,1); }
+.bg-purple-hover:hover      { background-color: rgba(174,139,164,1); }
+.bg-black-hover:hover       { background-color: rgba(000,000,000,1); }
+.bg-white-hover:hover       { background-color: rgba(255,255,255,1); }
+
 .pink                  { color: rgba(236,064,121,1); }
 .brown                 { color: rgba(047,041,038,1); }
 .gray                  { color: rgba(132,132,120,1); }
@@ -81,6 +95,20 @@ img {
 .purple                { color: rgba(174,139,164,1); }
 .black                 { color: rgba(000,000,000,1); }
 .white                 { color: rgba(255,255,255,1); }
+
+.pink-hover:hover                  { color: rgba(236,064,121,1); }
+.brown-hover:hover                 { color: rgba(047,041,038,1); }
+.gray-hover:hover                  { color: rgba(132,132,120,1); }
+.darkgray-hover:hover              { color: rgba(096,103,103,1); }
+.lightgray-hover:hover             { color: rgba(194,211,186,1); }
+.red-hover:hover                   { color: rgba(183,080,081,1); }
+.orange-hover:hover                { color: rgba(195,115,099,1); }
+.yellow-hover:hover                { color: rgba(197,192,101,1); }
+.green-hover:hover                 { color: rgba(140,165,115,1); }
+.blue-hover:hover                  { color: rgba(157,178,176,1); }
+.purple-hover:hover                { color: rgba(174,139,164,1); }
+.black-hover:hover                 { color: rgba(000,000,000,1); }
+.white-hover:hover                 { color: rgba(255,255,255,1); }
 
 .border-pink           { border-color: rgba(236,064,121,1); }
 .border-brown          { border-color: rgba(047,041,038,1); }
@@ -140,4 +168,26 @@ footer {
   border-bottom: 1px solid;
   margin-left: -2em;
   margin-right: -2em;
+}
+
+.drawers li:first-child a {
+  border-top: 1px solid;
+}
+
+.drawers li:last-child button {
+  display: block;
+  padding: .75em 2em .75em 3.25em;
+  border:none;
+  border-bottom: 1px solid;
+  margin-left: -2em;
+  margin-right: -2em;
+  width: calc(100% + 4em);
+  font-size: 1em;
+  text-align: left;
+  background: transparent;
+}
+
+.drawers li:last-child i.fa-plus {
+  position: absolute;
+  top: .8em;
 }
