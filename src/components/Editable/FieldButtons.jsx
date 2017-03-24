@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+// import css from '../../style'
 import Icon from '../Icon'
 
 function EditableButtons(props) {

@@ -1,10 +1,10 @@
 /* absolute z10 textCenter br0p25 textReset */
 .help-block {
   position: absolute;
-  top:1.7em;
+  top:1.7rem;
   z-index: 1000000;
-  padding: .3em .5em;
-  color: #fffdf4;
+  padding: .3rem .5rem;
+  color: white;
   text-align: center;
   text-decoration: none;
   text-shadow: none;
@@ -13,23 +13,24 @@
   word-wrap: break-word;
   white-space: pre;
   pointer-events: none;
-  background-color: rgba(50, 43, 0, .8);
+  background-color: rgba(047,041,038,.8);
   border-radius: .25em;
   -webkit-font-smoothing: subpixel-antialiased;
-  box-shadow: 0 0 .2em 0 rgba(50, 43, 0, .2);
+  box-shadow: 0 0 .3em 0 rgba(047,041,038,.3);
+  font-size: .9rem;
 }
 
 .help-block::before {
   position: absolute;
-  top: -.5em;
-  left: 50%;
+  top: -.5rem;
+  left: 10%;
   transform: translateX(-50%);
   z-index: 1000001;
   width: 0;
   height: 0;
   pointer-events: none;
-  border: .25em solid transparent;
-  border-bottom-color: rgba(50, 43, 0, .8);
-  color: rgba(50, 43, 0, .8);
+  border: .25rem solid transparent;
+  border-bottom-color: rgba(047,041,038,.8);
+  color: rgba(047,041,038,.8);
   content: '';
 }

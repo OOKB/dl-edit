@@ -120,6 +120,22 @@ img {
 .border-black          { border-color: rgba(000,000,000,1); }
 .border-white          { border-color: rgba(255,255,255,1); }
 
+.border-pink-hover:hover           { border-color: rgba(236,064,121,1); }
+.border-brown-hover:hover          { border-color: rgba(047,041,038,1); }
+.border-gray-hover:hover           { border-color: rgba(132,132,120,1); }
+.border-darkgray-hover:hover       { border-color: rgba(096,103,103,1); }
+.border-lightgray-hover:hover      { border-color: rgba(194,211,186,1); }
+.border-red-hover:hover            { border-color: rgba(183,080,081,1); }
+.border-orange-hover:hover         { border-color: rgba(195,115,099,1); }
+.border-yellow-hover:hover         { border-color: rgba(197,192,101,1); }
+.border-green-hover:hover          { border-color: rgba(140,165,115,1); }
+.border-blue-hover:hover           { border-color: rgba(157,178,176,1); }
+.border-purple-hover:hover         { border-color: rgba(174,139,164,1); }
+.border-black-hover:hover          { border-color: rgba(000,000,000,1); }
+.border-white-hover:hover          { border-color: rgba(255,255,255,1); }
+
+[class*="-hover"], button { transition: all 400ms; }
+
 /*** okay, some specific to this layout stuff ***/
 
 html,
@@ -163,7 +179,12 @@ nav li a,
   border-bottom: 1px solid;
 }
 
-.drawers li:last-child button {
+.drawers li a:hover {
+  text-decoration: underline;
+}
+
+
+.drawers li:first-child button {
   display: block;
   padding: .75rem 2rem .75rem 3.25rem;
   border:none;
@@ -172,9 +193,16 @@ nav li a,
   font-size: 1rem;
   text-align: left;
   background: transparent;
+  cursor: pointer;
 }
 
-.drawers li:last-child i.fa-plus {
+.drawers li:first-child button:hover {
+  background: rgba(194,211,186,.25);
+  color: rgba(194,211,186,1);
+  text-decoration: underline;
+}
+
+.drawers li:first-child i.fa-plus {
   position: absolute;
   top: .8rem;
   left: 2rem;
@@ -200,11 +228,14 @@ nav .menu .fa {
   border-radius: 50%;
   box-shadow: 0 0 0.33em 0 rgba(047,041,038,.333);
   margin-right: .5em;
+  transition: all 400ms;
+  color:rgba(132,132,120,1);
 }
 
 nav .menu a:hover .fa {
-  background-color: rgba(047,041,038,1);
+  background-color: rgba(194,211,186,1);
   box-shadow: 0 0 0em 0 rgba(047,041,038,.333);
+  color:white;
 }
 
 
@@ -235,7 +266,7 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 .editable-row > input {
   background: transparent;
   border: none;
-  border-bottom: 2px solid #fedb00;
+  border-bottom: 2px solid rgba(197,192,101,1);
   padding:0;
   transition: all 300ms;
   cursor: pointer;
@@ -249,10 +280,10 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 
 .btn-secret:focus,
 .editable-row > input:focus {
-  background-color: #fedb00;
-  outline-color: #fedb00;
-  padding-left: .3rem;
-  padding-right: .3rem;
+  background-color: rgba(197,192,101,.25);
+  outline-color: rgba(197,192,101,1);
+  padding-left: .66rem;
+  padding-right: .66rem;
 }
 
 .editable-buttons {
