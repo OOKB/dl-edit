@@ -198,14 +198,22 @@ nav li a,
 
 .drawers li:first-child button:hover {
   background: rgba(194,211,186,.25);
-  color: rgba(194,211,186,1);
   text-decoration: underline;
+  border-color: rgba(047,041,038,1);
 }
 
 .drawers li:first-child i.fa-plus {
   position: absolute;
   top: .8rem;
   left: 2rem;
+  transition: transform 400ms, text-shadow 400ms;
+  transform: scale(1);
+  text-shadow: 0 0 0 rgba(096,103,103,0);
+}
+
+.drawers li:first-child:hover i.fa-plus {
+  transform: scale(1.25);
+  text-shadow: 0 0 .1em rgba(096,103,103,.33);
 }
 
 .content {

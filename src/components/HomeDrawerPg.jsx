@@ -11,9 +11,11 @@ function HomeDrawerPg({ createItem, fieldInfo, items }) {
     <Page>
       <h1 style={css('bb m0 fs2 p1 pl2 pr2')}>Edit home drawer</h1>
       <ul className="drawers collections" style={css('lsNone m0 p0')}>
-        <li className="lightgray border-gray-hover">
-          <Icon symbol="plus" className="pointer fs1 gray" />
-          <button className="gray" onClick={createItem}>{fieldInfo.emptyText}</button>
+        <li className="gray lightgray-hover border-gray-hover">
+          <Icon symbol="plus" className="pointer fs1" />
+          <button className="gray lightgray-hover border-gray-hover" onClick={createItem}>
+            {fieldInfo.emptyText}
+          </button>
         </li>
         <h2 style={css('m0 bb mt2 pb1 pl2 pr2 gray')}>Drawer Content:</h2>
         {map(items, ItemEdit)}
@@ -24,7 +26,7 @@ function HomeDrawerPg({ createItem, fieldInfo, items }) {
 HomeDrawerPg.defaultProps = {
   fieldInfo: {
     emptyText: 'Add Drawer',
-    icon: { className: 'light-gray', symbol: 'pencil' },
+    icon: { className: 'lightgray', symbol: 'pencil' },
     id: 'new-drawer',
     placeholder: 'Title',
     prefix: ['HomeDrawer', 'title'],
