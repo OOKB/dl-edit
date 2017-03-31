@@ -9,13 +9,17 @@ export const getFileName = flow(at(['contentSha1', 'ext']), join('.'))
 export const setFileName = setField('fileName', getFileName)
 
 // Write values to contentSha1 and fileName fields.
-export function loadSha(file, next) {
+export function loadSha(file) {
   const reader = new window.FileReader()
-  reader.onloadend = () => sha1Hash(reader.result, flow(
-    setKey('contentSha1', file), setFileName, next
-  ))
-  reader.readAsArrayBuffer(file.file)
+  return new Promise((resolve, reject) => {
+    reader.onloadend = () => sha1Hash(reader.result, flow(
+      setKey('contentSha1', file), setFileName, resolve
+    ))
+    reader.onerror = reject
+    reader.readAsArrayBuffer(file.file)
+  })
 }
+
 // export const fileName = over()
 export const MAX_BYTES = 4100069
 export const errTxt = 'Invalid image file. The file is corrupt or has the wrong filename extension.'

@@ -3,24 +3,19 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import reducer from 'cape-redux-reducer'
 import { createSizeAction, createRemAction, listenResize } from 'redux-windowsize'
-import initializeFirebase, { fireMiddleware, reduxFirebase } from 'cape-firebase'
-
 import {
   getInitState,
   historyMiddleware,
   syncHistoryWithStore,
 } from 'redux-history-sync'
-import { entities, firebaseConfig } from '../config'
 
-export const firebase = initializeFirebase(firebaseConfig)
-// Build func to listen for firebase changes and dispatch to redux.
-const storeListener = reduxFirebase(entities)
+import { reduxFireListener, reduxFireMiddleware } from '../firebase'
 
 /* global window */
 
 const middleware = [
   historyMiddleware(window.history),
-  fireMiddleware(firebase, entities),
+  reduxFireMiddleware,
   // socket,
   // cookieMiddleware,
   thunk,
@@ -51,7 +46,7 @@ export default function configureStore(initialState) {
     )
   )
   syncHistoryWithStore(store, window)
-  storeListener(firebase, store)
+  reduxFireListener(store)
   store.dispatch(createSizeAction(window))
   store.dispatch(createRemAction(window))
   listenResize(store, window)

@@ -4,7 +4,7 @@ import { callWith, replaceField, set, setField, setKeyVal } from 'cape-lodash'
 import { createSelector } from 'reselect'
 import { getSelect, structuredSelector } from 'cape-select'
 import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
-import { entityTypeSelector } from 'redux-graph'
+import { entityTypeSelector, isEntityCreatedDate } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
 import { saveEntity } from 'cape-firebase'
 
@@ -12,7 +12,7 @@ import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
 import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/processFile'
 import { getIdFromFile, selectItems } from './items'
-import { firebase } from '../redux/configureStore'
+import firebase from '../firebase'
 
 const { storage, update } = firebase
 
@@ -34,16 +34,9 @@ export const onComplete = (dispatch, { id, fileName, type }) => () => {
   update({ id, type, url })
   // console.log('done', getFileUrl(fileName))
 }
-export const getSha1 = get('contentSha1')
-export const createFileEntity = agent => flow(
-  omitFile,
-  setField('id', getSha1),
-  setKeyVal('type', 'MediaObject'),
-  setKeyVal('agent', agent)
-)
-export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
-  const { contentSha1, fileName } = fileInfo
-  const entity = { ...fileInfo, agent, id: contentSha1, type: 'MediaObject' }
+
+export const uploadImage = (dispatch, entity, { file, ...fileInfo }) => {
+
   loadImageUrl(file, console.error, (imageInfo) => {
     if (!imageInfo) return saveEntity(entity)
     const { dataUrl, ...sizes } = imageInfo
@@ -51,6 +44,7 @@ export const uploadImage = (dispatch, agent) => ({ file, ...fileInfo }) => {
     if (dataUrl) dispatch(meta(collectionId, imageInfo))
     return undefined
   })
+
   // @TODO Make sure there isn't already this file in the database.
   const uploadTask = storage.child(fileName).put(file)
   uploadTask.on('state_changed',
@@ -69,20 +63,31 @@ export function blurSelectorOmitFile({ onBlur }, file) {
   return onBlur(omitFile(file))
 }
 
-export const selectImages = entityTypeSelector('MediaObject')
+export const selectImages = entityTypeSelector('ImageObject')
 export const findImage = getSelect(
   selectImages,
   fieldValue(collectionId, 'value.contentSha1'),
 )
 
+export const createImageEntity = state => flow(
+  omitFile,
+  setField('id', get('contentSha1')),
+  setKeyVal('type', 'ImageObject'),
+  setKeyVal('agent', selectUser(state))
+)
+// Get or create entity.
+export const getOrCreateEntity = (file, state) => {
+  const entity = get(file.contentSha1, selectImages(state))
+  return entity || createImageEntity(state)(file)
+}
+
 export const ensureFileEntity = file => (dispatch, getState) => {
   const state = getState()
-  const entity = get(file.contentSha1, selectImages(state))
-  if (entity) return flow(set(file, 'hasEntity', true), blurSelectorOmitFile, dispatch)
-  const agent = selectUser(state)
+  const entity = getOrCreateEntity(file, state)
+  // bytesTransferred
+  if (entity.bytesTransferred === entity.contentSize) return dispatch(blurSelectorOmitFile(entity))
   // Save to firebase
-  dispatch(saveEntity(createFileEntity(agent)(file)))
-  return file
+  return dispatch(saveEntity(entity))
 }
 export const invalidTypeMsg = ({ fileFormat }) =>
   `Invalid file type. Expected ${ACCEPT_FILE_TYPE}, got ${fileFormat}.`
@@ -113,7 +118,12 @@ export const errorOrBlur = next => props => (file) => {
 }
 // FILE UPLOAD
 export const handleSelect = errorOrBlur(({ dispatch }, file) => {
-  if (file) loadSha(file, file2 => dispatch(ensureFileEntity(file2)))
+  loadSha(file).then((file2) => {
+    const entity = dispatch(ensureFileEntity(file2))
+    if (!entity.hasEntity) {
+      uploadImage(dispatch, agent)
+    }
+  })
 })
 
 // A file has been selected. Upload a file. First func is props. Use that instead of thunk.
