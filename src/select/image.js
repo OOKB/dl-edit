@@ -6,7 +6,7 @@ import { getSelect, structuredSelector } from 'cape-select'
 import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
-import { saveEntity } from 'cape-firebase'
+import { saveEntity, updateEntity } from 'cape-firebase'
 
 import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
@@ -14,7 +14,7 @@ import { loadImage, loadImageUrl, loadSha } from '../components/FileUpload/proce
 import { getIdFromFile, selectItems } from './items'
 import firebase from '../firebase'
 
-const { storage, update } = firebase
+const { storage } = firebase
 
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
@@ -31,14 +31,15 @@ export const onComplete = (dispatch, { id, fileName, type }) => () => {
   const url = CDN_URL + fileName
   dispatch(saved(collectionId, { id, value: url }))
   loadImage(getImgSrc(url), () => clearFileSelect(dispatch))
-  update({ id, type, url })
+  dispatch(updateEntity({ id, type, url }))
   // console.log('done', getFileUrl(fileName))
 }
 
-export const uploadImage = (dispatch, entity, { file, ...fileInfo }) => {
-  const { fileName } = fileInfo
+export const uploadImage = (dispatch, entity, file) => {
+  // console.log(entity, file)
+  const { fileName } = entity
   loadImageUrl(file, console.error, (imageInfo) => {
-    if (!imageInfo) return saveEntity(entity)
+    // if (!imageInfo) return saveEntity(entity)
     const { dataUrl, ...sizes } = imageInfo
     saveEntity({ ...entity, ...sizes })
     if (dataUrl) dispatch(meta(collectionId, imageInfo))
@@ -81,11 +82,14 @@ export const getOrCreateEntity = (file, state) => {
   return entity || createImageEntity(state)(file)
 }
 
-export const ensureFileEntity = file => (dispatch, getState) => {
+// @return promise of entity.
+export const ensureFileEntity = (props, file) => (dispatch, getState) => {
   const state = getState()
   const entity = getOrCreateEntity(file, state)
   // bytesTransferred
-  if (entity.bytesTransferred === entity.contentSize) return dispatch(blurSelectorOmitFile(entity))
+  if (entity.bytesTransferred === entity.contentSize) {
+    return Promise.resolve(dispatch(blurSelectorOmitFile(props, entity)))
+  }
   // Save to firebase
   return dispatch(saveEntity(entity))
 }
@@ -117,21 +121,20 @@ export const errorOrBlur = next => props => (file) => {
   return next(props, file)
 }
 // FILE UPLOAD
-export const handleSelect = errorOrBlur(({ dispatch }, file) => {
-  loadSha(file).then((file2) => {
-    const entity = dispatch(ensureFileEntity(file2))
-    if (!entity.hasEntity) {
-      uploadImage(dispatch)
-    }
-  })
+export const handleSelect = errorOrBlur((props, file) => {
+  const { dispatch } = props
+  loadSha(file)
+  .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
+  .then(entity => !entity.hasEntity && uploadImage(dispatch, entity, file.file))
 })
 
 // A file has been selected. Upload a file. First func is props. Use that instead of thunk.
 export const handleUpload = props => (file) => {
+  console.log(file)
   // const hasError = errorCheck(props, file)
   // blurSelectorOmitFile(props, file)
   // clearFileSelect(dispatch)
-  // loadSha(file, ensureFileEntity(dispatch, getState))
+  // loadSha(file, ensureFileEntity(props, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
   // console.log(file)
   return undefined
