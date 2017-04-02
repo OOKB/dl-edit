@@ -1215,9 +1215,9 @@ caniuse-db@^1.0.30000539, caniuse-db@^1.0.30000554:
   version "1.0.30000597"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000597.tgz#b52e6cbe9dc83669affb98501629feaee1af6588"
 
-cape-firebase@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.4.0.tgz#93cc518203f5da3374e435faafbfc7445b1a94e6"
+cape-firebase@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.4.2.tgz#516791c8a2a31087cb78fe97c252cfe6bf91b703"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"
@@ -1227,9 +1227,9 @@ cape-firebase@^0.4.0:
     firebase "^3.6.9"
     lodash "^4.17.4"
     redux-field "^4.4.1"
-    redux-graph "^2.10.0"
+    redux-graph "^2.11.0"
 
-cape-lodash@^1.10.0, cape-lodash@^1.11.0, cape-lodash@^1.7.0, cape-lodash@^1.8.0, cape-lodash@^1.9.1:
+cape-lodash@^1.10.0, cape-lodash@^1.11.0, cape-lodash@^1.7.0, cape-lodash@^1.8.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/cape-lodash/-/cape-lodash-1.11.0.tgz#ba6d6d20e20bc771dcfcf32775d395fda4fb5007"
   dependencies:
@@ -1282,7 +1282,7 @@ cape-redux@^2.2.1:
     redux "^3.6.0"
     seamless-immutable "^6.3.0"
 
-cape-redux@^3.0.0, cape-redux@^3.1.0:
+cape-redux@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/cape-redux/-/cape-redux-3.1.0.tgz#ae657a5bdc1c5deba51d1e5912aa6ad98ee73a5e"
   dependencies:
@@ -1290,7 +1290,7 @@ cape-redux@^3.0.0, cape-redux@^3.1.0:
     lodash "^4.17.2"
     redux "^3.6.0"
 
-cape-select@^2.3.1, cape-select@^2.3.2, cape-select@^2.4.0:
+cape-select@^2.3.1, cape-select@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/cape-select/-/cape-select-2.4.0.tgz#c4682a65e9b4c3c57bdaa8ad2e8e6012fa963c5f"
   dependencies:
@@ -3694,13 +3694,13 @@ lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
 
-"lodash@>=3.5 <5", "lodash@^ 4.17.2", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.16.4, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
-
-lodash@^4.17.4:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
+"lodash@^ 4.17.2", lodash@^4.16.4, lodash@^4.17.2, lodash@^4.2.0, lodash@^4.2.1:
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -4852,25 +4852,14 @@ redux-field@^4.4.1, redux-field@^4.5.0:
     reselect "^2.5.4"
     seamless-immutable "^6.1.3"
 
-redux-graph@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.10.0.tgz#36906793aa31e676fd117a3a8d0975dd210ff665"
+redux-graph@^2.11.0, redux-graph@^2.7.0, redux-graph@^2.9.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.11.0.tgz#432aae2126206d2318b9467f40fa4f3597fca914"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"
     cape-select "^2.4.0"
     lodash "^4.17.4"
-    redux "^3.6.0"
-    reselect "^2.5.4"
-
-redux-graph@^2.7.0, redux-graph@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.9.0.tgz#287301f95ad58499902ea6eda7f0a752d4f2acc0"
-  dependencies:
-    cape-lodash "^1.9.1"
-    cape-redux "^3.0.0"
-    cape-select "^2.3.2"
-    lodash "^4.17.2"
     redux "^3.6.0"
     reselect "^2.5.4"
 

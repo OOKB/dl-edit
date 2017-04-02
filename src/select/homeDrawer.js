@@ -25,6 +25,7 @@ export const image = {
   id: 'image',
   name: 'Image',
   position: 1,
+  single: true,
   type: 'file',
 }
 export const drawerFields = {

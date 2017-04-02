@@ -1,5 +1,5 @@
 import sha1Hash from 'simple-sha1'
-import { flow } from 'lodash'
+import { flow, propertyOf } from 'lodash'
 import { at, join } from 'lodash/fp'
 import { setKey, setField } from 'cape-lodash'
 
@@ -7,6 +7,8 @@ import { setKey, setField } from 'cape-lodash'
 
 export const getFileName = flow(at(['contentSha1', 'ext']), join('.'))
 export const setFileName = setField('fileName', getFileName)
+
+export const getCollectionId = propertyOf({ image: 'ImageObject' })
 
 // Write values to contentSha1 and fileName fields.
 export function loadSha(file) {

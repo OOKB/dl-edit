@@ -28,7 +28,7 @@ export const createGetActions = actions => flow(
 export const getActions = flow(createGetActions, mapDispatchToProps)
 // Remove the props used to create the redux-field prefix.
 export function mergeProps(stateProps, dispatchProps, ownProps) {
-  const props = omit(ownProps, prefixProps)
+  const props = omit(ownProps, ['collectionId'])
   return Object.assign(props, stateProps, dispatchProps)
 }
 // modify actionObject and add our custom mergeProps onto standard redux connect().

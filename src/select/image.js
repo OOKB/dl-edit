@@ -6,7 +6,7 @@ import { getSelect, structuredSelector } from 'cape-select'
 import { clear, fieldValue, meta, saved, saveProgress } from 'redux-field'
 import { entityTypeSelector } from 'redux-graph'
 import { selectUser } from 'cape-redux-auth'
-import { saveEntity, updateEntity } from 'cape-firebase'
+import { saveEntity, saveTriple, updateEntity } from 'cape-firebase'
 
 import { CDN_URL } from '../config'
 import { omitFile } from '../components/FileUpload/dropZoneUtils'
@@ -86,6 +86,11 @@ export const getOrCreateEntity = (file, state) => {
 export const ensureFileEntity = (props, file) => (dispatch, getState) => {
   const state = getState()
   const entity = getOrCreateEntity(file, state)
+  // Attach entity to parent/subject.
+  const { subject, fieldId, single } = props
+  if (subject && fieldId) {
+    dispatch(saveTriple({ subject, predicate: fieldId, object: entity, single }))
+  }
   // bytesTransferred
   if (entity.bytesTransferred === entity.contentSize) {
     return Promise.resolve(dispatch(blurSelectorOmitFile(props, entity)))

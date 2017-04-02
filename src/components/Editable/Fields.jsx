@@ -11,15 +11,15 @@ function Fields({ entity, fields, prefix, title }) {
     <div>
       {title && <h2>{title}</h2>}
       <ul style={css('lsNone m0 p0')}>
-        {map(fields, field => (
-          <li key={field.id}>
+        {map(fields, ({ id, ...field }) => (
+          <li key={id}>
             {field.type === 'file' && <FileSelect
               {...field}
               collectionId={field.collectionId}
-              initialValue={entity[field.id]}
-              fieldId={prefix[1]}
+              initialValue={entity[id]}
+              fieldId={id}
+              subject={entity}
               onSelect={handleSelect}
-              prefix={prefix}
             />}
             {field.type !== 'file' && <Field
               {...field}
