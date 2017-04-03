@@ -23,7 +23,7 @@ function Fields({ entity, fields, prefix, title }) {
             />}
             {field.type !== 'file' && <Field
               {...field}
-              initialValue={entity[field.id]}
+              initialValue={entity[id]}
               prefix={prefix}
             />}
           </li>
