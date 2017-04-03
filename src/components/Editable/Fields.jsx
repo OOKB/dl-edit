@@ -23,6 +23,7 @@ function Fields({ entity, fields, prefix, title }) {
             />}
             {field.type !== 'file' && <Field
               {...field}
+              id={id}
               initialValue={entity[id]}
               prefix={prefix}
             />}
