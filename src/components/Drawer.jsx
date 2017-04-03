@@ -1,14 +1,16 @@
-import React, { PropType } from 'react'
+import React, { PropTypes } from 'react'
 
 export default function Drawer({ image, title }) {
   return (
-    <div>
+    <div style={{ border: 'solid' }}>
       {title && <h2>{title}</h2>}
-      {image && <img src={image} alt={title} />}
+      {image && image.url && <img src={`${image.url}?w=200`} alt={title} />}
     </div>
   )
 }
 Drawer.propTypes = {
-  title: PropType.string,
-  image: PropType.string,
+  title: PropTypes.string,
+  image: PropTypes.shape({
+    url: PropTypes.string,
+  }),
 }

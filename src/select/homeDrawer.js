@@ -1,5 +1,5 @@
 import { sortBy } from 'lodash'
-import { entityTypeSelector } from 'redux-graph'
+import { entityTypeSelector, fullEntitySelector } from 'redux-graph'
 import { getSelect, structuredSelector } from 'cape-select'
 import { saveEntity } from 'cape-firebase'
 import { createHistory } from 'redux-history-sync'
@@ -44,10 +44,11 @@ export function createItem() {
   }
 }
 const getEntityId = routeParam('id')
-const selectEntity = getSelect(drawerEntity, getEntityId)
+const selectDrawer = getSelect(drawerEntity, getEntityId)
+const selectDrawerFull = fullEntitySelector(selectDrawer)
 
 export const drawerEdit = structuredSelector({
-  entity: selectEntity,
+  entity: selectDrawerFull,
   fields: sortBy(drawerFields, 'position'),
   title: 'Drawer Editor',
   entityType: HOME_DRAWER,

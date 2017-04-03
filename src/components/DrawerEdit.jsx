@@ -3,14 +3,21 @@ import React, { PropTypes } from 'react'
 import css from '../style'
 import Page from './Page'
 import Fields from './Editable/Fields'
+import Drawer from './Drawer'
 
 function EntityEdit({ id, title, entityType, ...props }) {
+  const { entity } = props
   return (
     <Page id="entity-edit">
       {title && <h1 style={css('bb m0 fs2 p1 pl2 pr2')}>{title}</h1>}
       <div className="content">
-        {id && <p>ID: {id}</p>}
-        {props.entity && <Fields {...props} prefix={[entityType, id]} />}
+        {id && <p style={{ textAlign: 'right' }}>ID: {id}</p>}
+        {entity && props.entity.id &&
+          <div>
+            <Drawer {...entity} />
+            <Fields {...props} prefix={[entityType, id]} />
+          </div>
+        }
       </div>
     </Page>
   )
@@ -18,8 +25,9 @@ function EntityEdit({ id, title, entityType, ...props }) {
 
 EntityEdit.propTypes = {
   entity: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.shape({ id: PropTypes.string }),
   }),
   entityType: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
