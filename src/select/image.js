@@ -19,37 +19,39 @@ const { storage } = firebase
 export const ACCEPT_FILE_TYPE = 'image/jpeg'
 export const collectionId = 'file'
 export const debugReturn = (item) => { console.log(item); return item }
-export const onProgress = dispatch => flow(
-  pick(['bytesTransferred', 'totalBytes']), partial(saveProgress, collectionId), dispatch
+export const onProgress = (dispatch, prefix) => flow(
+  pick(['bytesTransferred', 'totalBytes']), partial(saveProgress, prefix), dispatch
 )
 
 export function getImgSrc(url) {
   return `${url}?crop=entropy&fit=crop&h=100&w=100`
 }
 export const clearFileSelect = callWith(clear(collectionId))
-export const onComplete = (dispatch, { id, fileName, type }) => () => {
+
+export const onComplete = (dispatch, { id, fileName, type }, prefix) => () => {
   const url = CDN_URL + fileName
-  dispatch(saved(collectionId, { id, value: url }))
+  dispatch(saved(prefix, { id, value: url }))
   loadImage(getImgSrc(url), () => clearFileSelect(dispatch))
   dispatch(updateEntity({ id, type, url }))
   // console.log('done', getFileUrl(fileName))
 }
 
-export const uploadImage = (dispatch, entity, file) => {
+export const uploadImage = (dispatch, entity, file, props) => {
   // console.log(entity, file)
   const { fileName } = entity
   loadImageUrl(file, console.error, (imageInfo) => {
     // if (!imageInfo) return saveEntity(entity)
     const { dataUrl, ...sizes } = imageInfo
-    saveEntity({ ...entity, ...sizes })
-    if (dataUrl) dispatch(meta(collectionId, imageInfo))
+    const entityUpdateFields = { ...pick(['id', 'type'], entity), ...sizes }
+    dispatch(saveEntity(entityUpdateFields))
+    if (dataUrl) dispatch(meta(props.prefix, imageInfo))
     return undefined
   })
 
   // @TODO Make sure there isn't already this file in the database.
   const uploadTask = storage.child(fileName).put(file)
   uploadTask.on('state_changed',
-    onProgress(dispatch), console.error, onComplete(dispatch, entity)
+    onProgress(dispatch, props.prefix), console.error, onComplete(dispatch, entity, props.prefix)
   )
   return uploadTask
 }
@@ -130,20 +132,20 @@ export const handleSelect = errorOrBlur((props, file) => {
   const { dispatch } = props
   loadSha(file)
   .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))
-  .then(entity => !entity.hasEntity && uploadImage(dispatch, entity, file.file))
+  .then(entity => !entity.hasEntity && uploadImage(dispatch, entity, file.file, props))
 })
 
 // A file has been selected. Upload a file. First func is props. Use that instead of thunk.
-export const handleUpload = props => (file) => {
-  console.log(file)
+// export const handleUpload = props => (file) => {
+//   console.log(file)
   // const hasError = errorCheck(props, file)
   // blurSelectorOmitFile(props, file)
   // clearFileSelect(dispatch)
   // loadSha(file, ensureFileEntity(props, getState))
   // if (file) loadSha(file, uploadImage(dispatch, agent))
   // console.log(file)
-  return undefined
-}
+//   return undefined
+// }
 export const findItemFromFile = getSelect(
   selectItems,
   flow(fieldValue(collectionId), getIdFromFile),
