@@ -26,12 +26,12 @@ export const onProgress = (dispatch, prefix) => flow(
 export function getImgSrc(url) {
   return `${url}?crop=entropy&fit=crop&h=100&w=100`
 }
-export const clearFileSelect = callWith(clear(collectionId))
+export function clearFileSelect(prefix) { return callWith(clear(prefix)) }
 
 export const onComplete = (dispatch, { id, fileName, type }, prefix) => () => {
   const url = CDN_URL + fileName
   dispatch(saved(prefix, { id, value: url }))
-  loadImage(getImgSrc(url), () => clearFileSelect(dispatch))
+  loadImage(getImgSrc(url), () => clearFileSelect(prefix)(dispatch))
   dispatch(updateEntity({ id, type, url }))
   // console.log('done', getFileUrl(fileName))
 }
@@ -129,6 +129,7 @@ export const errorOrBlur = next => props => (file) => {
 }
 // FILE UPLOAD
 export const handleSelect = errorOrBlur((props, file) => {
+  console.log(props)
   const { dispatch } = props
   loadSha(file)
   .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))

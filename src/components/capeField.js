@@ -31,7 +31,10 @@ export function mergeProps(stateProps, dispatchProps, ownProps) {
   const props = omit(ownProps, ['collectionId'])
   return Object.assign(props, stateProps, dispatchProps)
 }
+export function addPrefix(mapStateToProps) {
+  return (state, props) => ({ ...mapStateToProps(state, props), prefix: getEntityPrefix(props) })
+}
 // modify actionObject and add our custom mergeProps onto standard redux connect().
 export const createConnect = (mapStateToProps, actions) => connect(
-  mapStateToProps, isPlainObject(actions) ? getActions(actions) : actions, mergeProps
+  addPrefix(mapStateToProps), isPlainObject(actions) ? getActions(actions) : actions, mergeProps
 )
