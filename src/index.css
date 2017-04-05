@@ -145,13 +145,17 @@ body > div > div  {
   height: 100%;
 }
 
-page {
+page, .flex {
   display: flex;
   flex-wrap: wrap;
+}
+
+page {
   min-height: 100%;
   min-height: 100vh;
   flex-direction: column;
 }
+
 
 main {
   min-height: 100%;
@@ -301,4 +305,21 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 .editable-empty,
 .editable-empty .btn-secret {
   color: gray;
+}
+
+/** image library grid on image uploader page... **/
+.imageZone .fileInput {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.imageLibrary {
+  padding: 1rem;
+}
+
+.imageLibrary img {
+  display: block;
+}
+
+.imageLibrary .imageWrapper {
+  padding: 1rem;
 }

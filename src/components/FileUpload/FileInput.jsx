@@ -6,7 +6,7 @@ function FileInput({ accept, message, onSelect, uploadStarted }) {
   // Display empty div when upload has started.
   if (uploadStarted) return <div className="uploading" />
   return (
-    <div>
+    <div className="fileInput">
       <p>{message}</p>
       <input
         accept={accept}
