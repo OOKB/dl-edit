@@ -10,17 +10,17 @@ import FileProgress from './FileProgress'
 //   <FileUploading isSaving={isSaving} savedProgress={savedProgress} value={value} />
 //   {savedValue && <p>{savedTxt}<strong>{savedValue}</strong></p>}
 // </div>
-function FileUploading({ image, isSaving, savedProgress, value }) {
-  const { name } = value
-  const { dataUrl, ...dimensions } = image
+function FileUploading({ isSaving, savedProgress, value }) {
+  const { dataUrl, name } = value
+  // const { dataUrl, ...dimensions } = image
   const waitTxt = 'Calculating sha1 and preparing for upload.'
 
   return (
     <div className="dz-preview dz-processing dz-image-preview col-md-2">
-      <FileDetails {...value} {...dimensions} />
+      <FileDetails {...value} />
       {!isSaving && <p>{waitTxt}</p>}
       {isSaving && <p>Saving</p>}
-      {image && (
+      {dataUrl && (
         <div>
           { dataUrl &&
             <img alt={name} src={dataUrl} style={{ width: 300 }} width={300} />
