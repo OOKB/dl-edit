@@ -136,6 +136,23 @@ img {
 
 [class*="-hover"], button { transition: all 400ms; }
 
+/** dl specific colors **/
+.gold       { color: #84855e; }
+.light-gold { color: #bebfa4; }
+.dark-gold  { color: #42432f; }
+.gold-hover:hover       { color: #84855e; }
+.light-gold-hover:hover { color: #bebfa4; }
+.dark-gold-hover:hover  { color: #42432f; }
+
+.bg-gold       { background-color: #84855e; }
+.bg-light-gold { background-color: #bebfa4; }
+.bg-dark-gold  { background-color: #42432f; }
+.bg-gold-hover:hover       { background-color: #84855e; }
+.bg-light-gold-hover:hover { background-color: #bebfa4; }
+.bg-dark-gold-hover:hover  { background-color: #42432f; }
+
+
+
 /*** okay, some specific to this layout stuff ***/
 
 html,
