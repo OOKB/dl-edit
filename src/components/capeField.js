@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import {
-  flow, filter, get, isPlainObject, memoize, method, omit, overArgs, partial, property,
+  cond, flow, filter, get, isPlainObject, memoize, method,
+  omit, overArgs, partial, property, stubTrue,
 } from 'lodash'
 import { at, getOr } from 'lodash/fp'
 // import { mapDispatchToProps } from 'cape-redux'
@@ -13,7 +14,10 @@ export function mapDispatchToProps(getActions) {
   return (dispatch, props) => ({ dispatch, ...bindActionCreators(getActions(props), dispatch) })
 }
 export const prefixProps = ['collectionId', 'fieldId']
-export const getEntityPrefix = flow(at(prefixProps), filter)
+export const getEntityPrefix = cond([
+  [property('prefix'), property('prefix')],
+  [stubTrue, flow(at(prefixProps), filter)],
+])
 export const getFieldState = overArgs(get, [selectForm, getEntityPrefix])
 export const getFieldProp = flow(property, partial(flow, getFieldState))
 export const getFieldPropOr = flow(getOr, partial(flow, getFieldState))

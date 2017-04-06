@@ -4,7 +4,7 @@ import { handleSelect } from './dropZoneUtils'
 
 import DropZone from './DropZone'
 import FileInput from './FileInput'
-import FileDetails from './FileDetails'
+import FileUploading from './FileUploadingContainer'
 
 function FileSelect(props) {
   const { error, hasBlur, id, isRequired, name, value, ...rest } = props
@@ -20,7 +20,7 @@ function FileSelect(props) {
           <FileInput {...rest} onSelect={onSelect} />
         </div>
       }
-      {value && <FileDetails {...value} />}
+      {value && <FileUploading {...rest} value={value} />}
     </div>
   )
 }

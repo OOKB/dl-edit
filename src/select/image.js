@@ -40,7 +40,7 @@ export const uploadImage = (dispatch, entity, file, props) => {
   // console.log(entity, file)
   const { fileName } = entity
   loadImageUrl(file, console.error, (imageInfo) => {
-    // if (!imageInfo) return saveEntity(entity)
+    if (!imageInfo) return undefined
     const { dataUrl, ...sizes } = imageInfo
     const entityUpdateFields = { ...pick(['id', 'type'], entity), ...sizes }
     dispatch(saveEntity(entityUpdateFields))
@@ -53,6 +53,7 @@ export const uploadImage = (dispatch, entity, file, props) => {
   uploadTask.on('state_changed',
     onProgress(dispatch, props.prefix), console.error, onComplete(dispatch, entity, props.prefix)
   )
+  // Need to update the image form field.
   return uploadTask
 }
 
@@ -129,7 +130,6 @@ export const errorOrBlur = next => props => (file) => {
 }
 // FILE UPLOAD
 export const handleSelect = errorOrBlur((props, file) => {
-  console.log(props)
   const { dispatch } = props
   loadSha(file)
   .then(fileWithSha => dispatch(ensureFileEntity(props, fileWithSha)))

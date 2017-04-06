@@ -25,6 +25,7 @@ export function loadSha(file) {
 // export const fileName = over()
 export const MAX_BYTES = 4100069
 export const errTxt = 'Invalid image file. The file is corrupt or has the wrong filename extension.'
+
 export function loadImageUrl(file, onError, onSuccess) {
   if (file.size > MAX_BYTES) return onSuccess()
   const reader = new window.FileReader()

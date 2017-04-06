@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { partialRight } from 'lodash'
 import { createConnect, getFieldState } from '../capeField'
-import Component from './DropZone'
+import Component from './FileUploading'
 
 export const mapStateToProps = createSelector(
   partialRight(getFieldState, {}),
