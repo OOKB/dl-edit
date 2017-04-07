@@ -40,7 +40,7 @@ export function createItem() {
     // Create a new entity in firebase.
     dispatch(saveEntity({ type: HOME_DRAWER }))
     // Tell redux to open the new entity.
-    .then(({ id }) => dispatch(createHistory(`/project/${id}`)))
+    .then(({ id }) => dispatch(createHistory(`/home-drawer/${id}`)))
   }
 }
 const getEntityId = routeParam('id')

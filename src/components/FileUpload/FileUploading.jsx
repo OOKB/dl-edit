@@ -32,7 +32,6 @@ function FileUploading({ isSaving, savedProgress, value }) {
   )
 }
 FileUploading.propTypes = {
-  image: PropTypes.object,
   isSaving: PropTypes.bool.isRequired,
   value: PropTypes.object.isRequired,
   savedProgress: PropTypes.number.isRequired,

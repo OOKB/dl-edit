@@ -7,4 +7,7 @@ export const firebaseConfig = {
 }
 export const OT_ITEM = 'OrderTrackItem'
 export const HOME_DRAWER = 'HomeDrawer'
-export const entities = [OT_ITEM, HOME_DRAWER, 'ImageObject']
+export const SETTING = 'WebAppSetting'
+export const IMAGE = 'ImageObject'
+
+export const entities = [OT_ITEM, HOME_DRAWER, IMAGE, SETTING]
