@@ -8,7 +8,7 @@ function ItemEdit({ dateModified, onCheckbox, id, isActive, title }) {
     <li key={id}>
       <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
         {/* <Icon symbol="documents" /> */}
-        <span className="">{title || 'View'}</span>
+        <span className="">{title}</span>
         <span>{moment(dateModified).format('M/D/YY')}</span>
       </Link>
       <input name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
@@ -21,5 +21,8 @@ ItemEdit.propTypes = {
   isActive: PropTypes.bool.isRequired,
   onCheckbox: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+}
+ItemEdit.defaultProps = {
+  title: 'View',
 }
 export default ItemEdit
