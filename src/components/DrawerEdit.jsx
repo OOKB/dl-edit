@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-// import Button from './Button'
 import css from 'cape-style'
 import Page from './Page'
 import Fields from './Editable/Fields'
