@@ -3,7 +3,7 @@ import Link from 'redux-history-component'
 import moment from 'moment'
 // import Icon from './Icon'
 
-function ItemEdit({ dateModified, onCheckbox, id, isActive, title }) {
+function ItemEdit({ dateModified, onCheckbox, onDelete, id, isActive, title }) {
   return (
     <li key={id}>
       <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
@@ -12,6 +12,7 @@ function ItemEdit({ dateModified, onCheckbox, id, isActive, title }) {
         <span>{moment(dateModified).format('M/D/YY')}</span>
       </Link>
       <input name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
+      <button onClick={onDelete}>Delete</button>
     </li>
   )
 }
@@ -20,6 +21,7 @@ ItemEdit.propTypes = {
   id: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   onCheckbox: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 }
 ItemEdit.defaultProps = {

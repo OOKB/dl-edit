@@ -6,12 +6,13 @@ import Icon from './Icon'
 import ItemEdit from './ItemEdit'
 // import Field from './Editable/FieldWrapper'
 
-function HomeDrawerPg({ activeDrawerId, createItem, fieldInfo, items, selectDrawer }) {
+function HomeDrawerPg({ activeDrawerId, createItem, entityDel, fieldInfo, items, selectDrawer }) {
   function itemProps(item) {
     return {
       ...item,
       isActive: activeDrawerId === item.id,
       key: item.id,
+      onDelete: () => entityDel(item),
       onCheckbox: () => selectDrawer(item.id),
     }
   }
@@ -44,6 +45,7 @@ HomeDrawerPg.defaultProps = {
 HomeDrawerPg.propTypes = {
   activeDrawerId: PropTypes.string,
   createItem: PropTypes.func.isRequired,
+  entityDel: PropTypes.func.isRequired,
   fieldInfo: PropTypes.shape({
     emptyText: PropTypes.string,
   }),
