@@ -5,14 +5,14 @@ import moment from 'moment'
 
 function ItemEdit({ dateModified, onCheckbox, onDelete, id, isActive, title }) {
   return (
-    <li key={id}>
+    <li key={id} className="brown bg-gray-hover white-hover">
       <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
         {/* <Icon symbol="documents" /> */}
         <span className="">{title}</span>
         <span>{moment(dateModified).format('M/D/YY')}</span>
       </Link>
-      <input name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
-      <button onClick={onDelete}>Delete</button>
+      <input className="selectItem" name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
+      <button className="delete bg-yellow-hover" onClick={onDelete}>Delete</button>
     </li>
   )
 }

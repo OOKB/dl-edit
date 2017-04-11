@@ -204,7 +204,6 @@ nav li a,
   text-decoration: underline;
 }
 
-
 .drawers li:first-child button {
   display: block;
   padding: .75rem 2rem .75rem 3.25rem;
@@ -339,4 +338,27 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 
 .imageLibrary .imageWrapper {
   padding: 1rem;
+}
+
+.delete,
+.selectItem {
+  position: absolute;
+  top: 0;
+  height: calc(100% - 1px);
+  padding: 0;
+  margin: 0;
+}
+.selectItem {
+  left: .75rem;
+  font-size: 2rem;
+}
+.delete {
+  right: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: none;
+  background: rgba(255,255,255,.5);
+  border-top: none;
+  border-bottom: none;
+  cursor: pointer;
 }
