@@ -26,11 +26,20 @@ export const image = {
   collectionId: 'ImageObject',
   id: 'image',
   name: 'Image',
-  position: 1,
+  position: 2,
   single: true,
   type: 'file',
 }
+export const description = {
+  id: 'description',
+  // description: '',
+  position: 1,
+  name: 'Description',
+  type: 'textarea',
+  validators: ['isRequired'],
+}
 export const drawerFields = {
+  description,
   image,
   title,
 }
