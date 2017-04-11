@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { map } from 'lodash'
 import { handleSelect } from '../../select/image'
-import css from '../../style'
+import css from 'cape-style'
 import Field from './Field'
 import FileSelect from '../FileUpload/FileSelectContainer'
 

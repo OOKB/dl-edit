@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import marked from 'marked'
-import css from '../style'
+import css from 'cape-style'
 
 export default function Drawer({ description, image, title }) {
   return (
