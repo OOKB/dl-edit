@@ -1,12 +1,14 @@
 import { sortBy } from 'lodash'
-import { entityTypeSelector, fullEntitySelector } from 'redux-graph'
-import { getSelect, structuredSelector } from 'cape-select'
-import { saveEntity } from 'cape-firebase'
+import { entityTypeSelector, fullEntitySelector, tripleDel } from 'redux-graph'
+import { getSelect, select, structuredSelector } from 'cape-select'
+import { saveEntity, deleteTriple, saveTriple } from 'cape-firebase'
 import { createHistory } from 'redux-history-sync'
+
 // import { open } from 'redux-field'
 import { HOME_DRAWER } from '../config'
 import { routeParam } from '../redux/routing'
 import { ACCEPT_FILE_TYPE } from './image'
+import { activeDrawerEntity, selectActiveDrawerEntity } from './homeDrawerShare'
 
 export const drawerEntity = entityTypeSelector(HOME_DRAWER)
 
@@ -32,7 +34,11 @@ export const drawerFields = {
   image,
   title,
 }
+
+export const selectActiveDrawerId = select(selectActiveDrawerEntity, 'mainEntity.id')
+
 export const drawerSelector = structuredSelector({
+  activeDrawerId: selectActiveDrawerId,
   items: drawerEntity,
 })
 export function createItem() {
@@ -44,8 +50,19 @@ export function createItem() {
   }
 }
 const getEntityId = routeParam('id')
-const selectDrawer = getSelect(drawerEntity, getEntityId)
-const selectDrawerFull = fullEntitySelector(selectDrawer)
+const selectDrawerEntity = getSelect(drawerEntity, getEntityId)
+const selectDrawerFull = fullEntitySelector(selectDrawerEntity)
+
+const drawerTriple = { subject: activeDrawerEntity, predicate: 'mainEntity', single: true }
+export function selectDrawer(id) {
+  return (dispatch, getState) => {
+    if (selectActiveDrawerId(getState()) === id) {
+      dispatch(tripleDel(drawerTriple)) // HACK Because how delete Triple from firebase?
+      return dispatch(deleteTriple(drawerTriple))
+    }
+    return dispatch(saveTriple({ ...drawerTriple, object: { id, type: HOME_DRAWER } }))
+  }
+}
 
 export const drawerEdit = structuredSelector({
   entity: selectDrawerFull,
@@ -56,4 +73,5 @@ export const drawerEdit = structuredSelector({
 })
 export const drawerActions = {
   createItem,
+  selectDrawer,
 }
