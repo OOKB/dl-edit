@@ -1215,9 +1215,9 @@ caniuse-db@^1.0.30000539, caniuse-db@^1.0.30000554:
   version "1.0.30000597"
   resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000597.tgz#b52e6cbe9dc83669affb98501629feaee1af6588"
 
-cape-firebase@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.5.1.tgz#723c19217908f5979821ce6efecab1bbc5f5e76c"
+cape-firebase@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/cape-firebase/-/cape-firebase-0.6.0.tgz#1efe1cfe297edfedac0ef28fffaa391c28e0cff3"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"
@@ -1258,22 +1258,7 @@ cape-redux-collection@^4.0.1:
     redux-history-sync "^3.1.0"
     reselect "^2.5.4"
 
-cape-redux-reducer@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/cape-redux-reducer/-/cape-redux-reducer-3.6.0.tgz#f6c4a5df7ec454b6073b395a6281830d897c0589"
-  dependencies:
-    cape-lodash "^1.10.0"
-    cape-redux "^3.1.0"
-    cape-redux-auth "^4.0.0"
-    cape-redux-collection "^4.0.1"
-    lodash "^4.17.2"
-    redux-field "^4.4.1"
-    redux-graph "^2.9.0"
-    redux-history-sync "^3.1.0"
-    redux-thunk "^2.1.0"
-    redux-windowsize "^1.3.1"
-
-cape-redux-reducer@^3.7.1:
+cape-redux-reducer@^3.6.0, cape-redux-reducer@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/cape-redux-reducer/-/cape-redux-reducer-3.7.1.tgz#3d445d4f26fa80617ab45d24950b0561b8ca96fb"
   dependencies:
@@ -4867,9 +4852,9 @@ redux-field@^4.4.1, redux-field@^4.5.0:
     reselect "^2.5.4"
     seamless-immutable "^6.1.3"
 
-redux-graph@^2.11.0, redux-graph@^2.12.0, redux-graph@^2.7.0, redux-graph@^2.9.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.12.0.tgz#b68940a5597fb9aa712701fbea3a5b90dfcf1fb3"
+redux-graph@^2.11.0, redux-graph@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.12.1.tgz#02e6742389f8715ead44751aa8e767f63c12ca47"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"
@@ -4878,9 +4863,9 @@ redux-graph@^2.11.0, redux-graph@^2.12.0, redux-graph@^2.7.0, redux-graph@^2.9.0
     redux "^3.6.0"
     reselect "^3.0.0"
 
-redux-graph@^2.12.1:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.12.1.tgz#02e6742389f8715ead44751aa8e767f63c12ca47"
+redux-graph@^2.12.0, redux-graph@^2.7.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/redux-graph/-/redux-graph-2.12.0.tgz#b68940a5597fb9aa712701fbea3a5b90dfcf1fb3"
   dependencies:
     cape-lodash "^1.11.0"
     cape-redux "^3.1.0"

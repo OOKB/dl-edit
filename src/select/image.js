@@ -82,6 +82,7 @@ export const createImageEntity = state => flow(
 // Get or create entity.
 export const getOrCreateEntity = (file, state) => {
   const entity = get(file.contentSha1, selectImages(state))
+  if (entity) console.log('found entity')
   return entity || createImageEntity(state)(file)
 }
 

@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash'
-import { entityDel, entityTypeSelector, fullEntitySelector, tripleDel } from 'redux-graph'
+import { entityTypeSelector, fullEntitySelector, tripleDel } from 'redux-graph'
 import { getSelect, select, structuredSelector } from 'cape-select'
-import { saveEntity, deleteTriple, saveTriple } from 'cape-firebase'
+import { saveEntity, deleteEntity, deleteTriple, saveTriple } from 'cape-firebase'
 import { createHistory } from 'redux-history-sync'
 
 // import { open } from 'redux-field'
@@ -73,6 +73,6 @@ export const drawerEdit = structuredSelector({
 })
 export const drawerActions = {
   createItem,
-  entityDel,
+  entityDel: deleteEntity,
   selectDrawer,
 }
