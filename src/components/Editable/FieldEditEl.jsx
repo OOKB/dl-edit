@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import Textarea from 'react-textarea-autosize'
 
 import EditableButtons from './FieldButtons'
 import Help from './FieldHelp'
@@ -16,7 +17,17 @@ function EditField(props) {
   return (
     <div className={className}>
       <div className="editable-row">
-        <input id={id} type={type} onChange={onChange} value={value || ''} />
+        {type !== 'textarea' &&
+          <input id={id} type={type} onChange={onChange} value={value || ''} />
+        }
+        {type === 'textarea' &&
+          <Textarea
+            className="form-control"
+            id={id}
+            onChange={onChange}
+            value={value}
+          />
+        }
         {showButtons &&
           <EditableButtons
             disabled={hasError}

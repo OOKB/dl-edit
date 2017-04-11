@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
+import marked from 'marked'
 import css from '../style'
 
-export default function Drawer({ image, title, blurb }) {
+export default function Drawer({ description, image, title }) {
   return (
     <section className="drawer bg-light-gold inset-shadow" style={css('p2 relative')}>
 
@@ -13,7 +14,7 @@ export default function Drawer({ image, title, blurb }) {
 
         <div style={css('w50 p2')}>
           {title && <h1 className="dark-gold" style={css('m0 mb2')}>{title}</h1>}
-          <p>{blurb}</p>
+          <p dangerouslySetInnerHTML={{ __html: marked(description) }} />
         </div>
 
       </div>
@@ -22,12 +23,12 @@ export default function Drawer({ image, title, blurb }) {
   )
 }
 Drawer.propTypes = {
+  description: PropTypes.string.isRequired,
   title: PropTypes.string,
   image: PropTypes.shape({
     url: PropTypes.string,
   }),
-  blurb: PropTypes.string,
 }
 Drawer.defaultProps = {
-  blurb: 'Lorem ipsum dolor sit amet adis plicit?'
+  description: 'Lorem ipsum dolor sit amet adis plicit?',
 }
