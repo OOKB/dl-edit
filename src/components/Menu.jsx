@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import map from 'lodash/map'
-import css from '../style'
+import css from 'cape-style'
 import NavItem from './NavItem'
 
 function Menu({ activeId, links, actions }) {
