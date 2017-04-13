@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react'
+import css from 'cape-style'
 import { map } from 'lodash'
 import { handleSelect } from '../../select/image'
-import css from 'cape-style'
 import Field from './Field'
 import FileSelect from '../FileUpload/FileSelectContainer'
 
 function Fields({ entity, fields, prefix, title }) {
   // console.log(entity)
   return (
-    <div>
+    <div className="fields">
       {title && <h2>{title}</h2>}
       <ul style={css('lsNone m0 p0')}>
         {map(fields, ({ id, ...field }) => (

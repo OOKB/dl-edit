@@ -12,7 +12,7 @@ function EntityEdit({ id, title, entityType, ...props }) {
       <div className="content">
         {id && <p style={{ textAlign: 'right' }}>ID: {id}</p>}
         {entity && props.entity.id &&
-          <div>
+          <div className="editorTools">
             <Drawer {...entity} />
             <Fields {...props} prefix={[entityType, id]} />
           </div>

@@ -137,21 +137,34 @@ img {
 [class*="-hover"], button { transition: all 400ms; }
 
 /** dl specific colors **/
+.dl-white   { color: #f2efe5; }
 .gold       { color: #84855e; }
 .light-gold { color: #bebfa4; }
 .dark-gold  { color: #42432f; }
+.dl-white-hover:hover   { color: #f2efe5; }
 .gold-hover:hover       { color: #84855e; }
 .light-gold-hover:hover { color: #bebfa4; }
 .dark-gold-hover:hover  { color: #42432f; }
 
+.bg-dl-white   { background-color: #f2efe5; }
 .bg-gold       { background-color: #84855e; }
 .bg-light-gold { background-color: #bebfa4; }
 .bg-dark-gold  { background-color: #42432f; }
+.bg-dl-white-hover:hover   { background-color: #f2efe5; }
 .bg-gold-hover:hover       { background-color: #84855e; }
 .bg-light-gold-hover:hover { background-color: #bebfa4; }
 .bg-dark-gold-hover:hover  { background-color: #42432f; }
 
+.border-dl-white   { border-color: #f2efe5; }
+.border-gold       { border-color: #84855e; }
+.border-light-gold { border-color: #bebfa4; }
+.border-dark-gold  { border-color: #42432f; }
+.border-dl-white-hover:hover   { border-color: #f2efe5; }
+.border-gold-hover:hover       { border-color: #84855e; }
+.border-light-gold-hover:hover { border-color: #bebfa4; }
+.border-dark-gold-hover:hover  { border-color: #42432f; }
 
+.ba { border-style: solid; border-width: 1px;}
 
 /*** okay, some specific to this layout stuff ***/
 
@@ -279,6 +292,7 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 .editable-fixed-value {
   font-size: 1rem;
   line-height: 1.4rem;
+  text-align: left;
 }
 
 .editable-click,
@@ -323,6 +337,39 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
   color: gray;
 }
 
+.editable button.btn-secret:hover {
+  color: rgba(140,165,115,1);
+}
+.editable button.btn-secret:hover::after {
+  content: '\f051';
+  font: normal normal normal 14px/1 'DL';
+  display: block;
+  font-size: 1em;
+  position: absolute;
+  left: calc(100% + .15em);
+  top:-.25em;
+}
+
+.editorTools .fields > ul > li {
+  border-top: 1px solid rgba(194,211,186,.25);
+  padding-top:.75em;
+  padding-bottom: .75em;
+}
+.editorTools .fields .editable-field label,
+.editorTools .fields .editable-field .editable-row {
+  display:flex;
+  flex-wrap: wrap;
+}
+.editorTools .fields .editable-field label strong {
+  display:block;
+  width: 150px;
+}
+.editorTools .fields .editable-field label > .editable {
+  max-width: 30em;
+  width: 50%;
+  min-width: 300px;
+}
+
 /** image library grid on image uploader page... **/
 .imageZone .fileInput {
   padding-left: 2rem;
@@ -361,4 +408,14 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
   border-top: none;
   border-bottom: none;
   cursor: pointer;
+}
+
+.flex {
+  display:flex;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

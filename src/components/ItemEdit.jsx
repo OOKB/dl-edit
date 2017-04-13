@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import css from 'cape-style'
 import Link from 'redux-history-component'
 import moment from 'moment'
 // import Icon from './Icon'
@@ -8,8 +9,8 @@ function ItemEdit({ dateModified, onCheckbox, onDelete, id, isActive, title }) {
     <li key={id} className="brown bg-gray-hover white-hover">
       <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
         {/* <Icon symbol="documents" /> */}
-        <span className="">{title}</span>
-        <span>{moment(dateModified).format('M/D/YY')}</span>
+        <span className="date">{moment(dateModified).format('M/D/YY')}</span>
+        <span className="title" style={css('pl1')}>{title}</span>
       </Link>
       <input className="selectItem" name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
       <button className="delete bg-yellow-hover" onClick={onDelete}>Delete</button>
