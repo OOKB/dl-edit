@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
+import css from 'cape-style'
 import { pick } from 'lodash'
 import InternalLink from 'redux-history-component'
 import LinkContent from './LinkContent'
-import css from 'cape-style'
 
 export function getHref({ href, link, siteId, src }) {
   const linkHref = href || src || link

@@ -137,21 +137,34 @@ img {
 [class*="-hover"], button { transition: all 400ms; }
 
 /** dl specific colors **/
+.dl-white   { color: #f2efe5; }
 .gold       { color: #84855e; }
 .light-gold { color: #bebfa4; }
 .dark-gold  { color: #42432f; }
+.dl-white-hover:hover   { color: #f2efe5; }
 .gold-hover:hover       { color: #84855e; }
 .light-gold-hover:hover { color: #bebfa4; }
 .dark-gold-hover:hover  { color: #42432f; }
 
+.bg-dl-white   { background-color: #f2efe5; }
 .bg-gold       { background-color: #84855e; }
 .bg-light-gold { background-color: #bebfa4; }
 .bg-dark-gold  { background-color: #42432f; }
+.bg-dl-white-hover:hover   { background-color: #f2efe5; }
 .bg-gold-hover:hover       { background-color: #84855e; }
 .bg-light-gold-hover:hover { background-color: #bebfa4; }
 .bg-dark-gold-hover:hover  { background-color: #42432f; }
 
+.border-dl-white   { border-color: #f2efe5; }
+.border-gold       { border-color: #84855e; }
+.border-light-gold { border-color: #bebfa4; }
+.border-dark-gold  { border-color: #42432f; }
+.border-dl-white-hover:hover   { border-color: #f2efe5; }
+.border-gold-hover:hover       { border-color: #84855e; }
+.border-light-gold-hover:hover { border-color: #bebfa4; }
+.border-dark-gold-hover:hover  { border-color: #42432f; }
 
+.ba { border-style: solid; border-width: 1px;}
 
 /*** okay, some specific to this layout stuff ***/
 
@@ -204,10 +217,9 @@ nav li a,
   text-decoration: underline;
 }
 
-
 .drawers li:first-child button {
   display: block;
-  padding: .75rem 2rem .75rem 3.25rem;
+  padding: .75rem 2rem .75rem 2rem;
   border:none;
   border-bottom: 1px solid;
   width: 100%;
@@ -226,7 +238,7 @@ nav li a,
 .drawers li:first-child i.fa-plus {
   position: absolute;
   top: .8rem;
-  left: 2rem;
+  left: .66rem;
   transition: transform 400ms, text-shadow 400ms;
   transform: scale(1);
   text-shadow: 0 0 0 rgba(096,103,103,0);
@@ -280,6 +292,7 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 .editable-fixed-value {
   font-size: 1rem;
   line-height: 1.4rem;
+  text-align: left;
 }
 
 .editable-click,
@@ -324,6 +337,39 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
   color: gray;
 }
 
+.editable button.btn-secret:hover {
+  color: rgba(140,165,115,1);
+}
+.editable button.btn-secret:hover::after {
+  content: '\f051';
+  font: normal normal normal 14px/1 'DL';
+  display: block;
+  font-size: 1em;
+  position: absolute;
+  left: calc(100% + .15em);
+  top:-.25em;
+}
+
+.editorTools .fields > ul > li {
+  border-top: 1px solid rgba(194,211,186,.25);
+  padding-top:.75em;
+  padding-bottom: .75em;
+}
+.editorTools .fields .editable-field label,
+.editorTools .fields .editable-field .editable-row {
+  display:flex;
+  flex-wrap: wrap;
+}
+.editorTools .fields .editable-field label strong {
+  display:block;
+  width: 150px;
+}
+.editorTools .fields .editable-field label > .editable {
+  max-width: 30em;
+  width: 50%;
+  min-width: 300px;
+}
+
 /** image library grid on image uploader page... **/
 .imageZone .fileInput {
   padding-left: 2rem;
@@ -339,4 +385,142 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 
 .imageLibrary .imageWrapper {
   padding: 1rem;
+}
+
+button {  cursor: pointer; }
+
+.delete {
+  position: absolute;
+  top: .25rem;
+  right:1rem;
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 50%;
+  color:white;
+  padding:0;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+  color:transparent;
+  outline: 0;
+}
+.delete::after {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  height: 2rem;
+  width: 2rem;
+  line-height: 2rem;
+  display: block;
+  content: '\f064';
+  font-family: 'DL';
+  color:white;
+  font-size: 1rem;
+  text-align: center;
+}
+.drawers li:hover .delete {
+  opacity: 1;
+}
+.delete:hover {
+  box-shadow: 0 0 .5rem 0 rgba(0,0,0,.4);
+}
+.delete:active,
+.delete:focus {
+   outline: 0;
+   -webkit-box-shadow: 0 0 0 2px #fff, 0 0 1px 4px rgba(195,115,099,.8);
+   -moz-box-shadow: 0 0 0 2px #fff,0 0 1px 4px rgba(195,115,099,.8);
+   -ms-box-shadow: 0 0 0 2px #fff,0 0 1px 4px rgba(195,115,099,.8);
+   -o-box-shadow: 0 0 0 2px #fff,0 0 1px 4px rgba(195,115,099,.8);
+   box-shadow: 0 0 0 2px #fff, 0 0 1px 4px rgba(195,115,099,.8);
+ }
+
+
+.drawers .date {
+  font-family: monospace;
+  width: 4.5rem;
+  display: inline-block;
+}
+
+/** custom input from WTFforms **/
+.control {
+  position: relative;
+  display: inline-block;
+  padding-left: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  z-index: 9;
+}
+.drawers li .control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - 1px);
+  width: 2rem;
+  padding: 0;
+  margin: 0;
+}
+.control input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.control-indicator {
+  position: absolute;
+  top: 33%;
+  left: .5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 65%;
+  color: #eee;
+  text-align: center;
+  background-color: #eee;
+  background-size: 50% 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 9;
+  transition: 350ms;
+}
+.checkbox .control-indicator {
+  border-radius: .25rem;
+}
+.control input:checked ~ .control-indicator {
+  color: #fff;
+  background-color: rgba(194,211,186,1);
+  -webkit-box-shadow: 0 0 0 1px #fff, 0 0 1px 3px rgba(194,211,186,.75);
+  -moz-box-shadow: 0 0 0 1px #fff,0 0 1px 3px rgba(194,211,186,.75);
+  -ms-box-shadow: 0 0 0 1px #fff,0 0 1px 3px rgba(194,211,186,.75);
+  -o-box-shadow: 0 0 0 1px #fff,0 0 1px 3px rgba(194,211,186,.75);
+  box-shadow: 0 0 0 1px #fff, 0 0 1px 3px rgba(194,211,186,.75);
+}
+
+.checkbox input:checked ~ .control-indicator::after {
+  content: '\f003';
+  display: block;
+  font-size: .8rem;
+  color: rgba(252,251,248,1);
+  line-height: 1rem;
+  text-align: center;
+  width: 1rem;
+  height: 1rem;
+  font-family: 'DL';
+  position: absolute;
+  z-index: 10;
+}
+.flex {
+  display:flex;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }

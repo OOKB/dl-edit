@@ -8,7 +8,7 @@ import FileSelect from '../FileUpload/FileSelectContainer'
 function Fields({ entity, fields, prefix, title }) {
   // console.log(entity)
   return (
-    <div>
+    <div className="fields">
       {title && <h2>{title}</h2>}
       <ul style={css('lsNone m0 p0')}>
         {map(fields, ({ id, ...field }) => (
