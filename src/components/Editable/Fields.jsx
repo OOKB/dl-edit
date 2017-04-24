@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import { map } from 'lodash'
 import css from 'cape-style'
+import Field from 'cape-mixer/lib/Editable/Field'
 import { handleSelect } from '../../select/image'
-import Field from './Field'
+// import Field from './Field'
 import FileSelect from '../FileUpload/FileSelectContainer'
 
 function Fields({ entity, fields, prefix, title }) {

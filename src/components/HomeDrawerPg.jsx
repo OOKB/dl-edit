@@ -4,7 +4,6 @@ import css from 'cape-style'
 import Page from './Page'
 import Icon from './Icon'
 import ItemEdit from './ItemEdit'
-// import Field from './Editable/FieldWrapper'
 
 function HomeDrawerPg({ activeDrawerId, createItem, entityDel, fieldInfo, items, selectDrawer }) {
   function itemProps(item) {
