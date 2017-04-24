@@ -7,13 +7,16 @@ import moment from 'moment'
 function ItemEdit({ dateModified, onCheckbox, onDelete, id, isActive, title }) {
   return (
     <li key={id} className="brown bg-gray-hover white-hover">
+      <label className="control checkbox">
+        <input className="selectItem" name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
+        <span className="control-indicator" />
+      </label>
+      <button className="delete bg-orange-hover" onClick={onDelete}>Delete</button>
       <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
         {/* <Icon symbol="documents" /> */}
         <span className="date">{moment(dateModified).format('M/D/YY')}</span>
         <span className="title" style={css('pl1')}>{title}</span>
       </Link>
-      <input className="selectItem" name="isActive" type="checkbox" checked={isActive} onChange={onCheckbox} />
-      <button className="delete bg-yellow-hover" onClick={onDelete}>Delete</button>
     </li>
   )
 }

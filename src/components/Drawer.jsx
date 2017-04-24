@@ -6,7 +6,7 @@ export default function Drawer({ description, image, title }) {
   return (
     <section className="drawer bg-light-gold inset-shadow" style={css('p2 relative')}>
 
-      <div className="maxw50rem flex flex-center" style={css('flex mb0 pb0 mlrauto textCenter')}>
+      <div className="maxw50rem flex flex-center" style={css('mb0 pb0 mlrauto textCenter')}>
 
         <div className="imageWrapper border-dl-white ba" style={css('w50 p0p5 ba')}>
           {image && image.url && <img src={`${image.url}?w=600`} alt={title} />}

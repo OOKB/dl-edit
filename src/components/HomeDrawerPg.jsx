@@ -26,7 +26,6 @@ function HomeDrawerPg({ activeDrawerId, createItem, entityDel, fieldInfo, items,
             {fieldInfo.emptyText}
           </button>
         </li>
-        <h2 style={css('m0 bb mt2 pb1 pl2 pr2 gray')}>Drawer Content:</h2>
         {map(items, item => <ItemEdit {...itemProps(item)} />)}
       </ul>
     </Page>
