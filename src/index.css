@@ -167,6 +167,7 @@ img {
 .ba { border-style: solid; border-width: 1px;}
 
 /*** okay, some specific to this layout stuff ***/
+button {  cursor: pointer; }
 
 html,
 body,
@@ -186,27 +187,73 @@ page {
   flex-direction: column;
 }
 
+.flex-center {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
 
 main {
   min-height: 100%;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
-main nav { width: 20%; }
-main > div { width: 80%; }
+main nav { width: 100%; }
+main > div { width: 100%; }
 
 nav .menu {
-  margin-top: 4rem;
   border-top: 1px solid;
+  margin:0;
+}
+
+@media (min-width: 40em) {
+  main {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  main nav { width: 20%; }
+  main > div { width: 80%; }
+
+  nav .menu {
+    margin-top: 4rem;
+  }
 }
 
 nav li a,
 .drawers li a {
   padding: .75rem 2rem;
 }
+/** basic layout stuff above **/
 
+/** Increasingly idiotically complex customy styling below **/
+
+/** <sprucing up the side nav> **/
+nav .menu .fa {
+  padding: .575em 0;
+  height: 2.2em;
+  width: 2.2em;
+  text-align: center;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0.33em 0 rgba(047,041,038,.333);
+  margin-right: .5em;
+  transition: all 400ms;
+  color:rgba(132,132,120,1);
+}
+
+nav .menu a:hover .fa {
+  background-color: rgba(194,211,186,1);
+  box-shadow: 0 0 0em 0 rgba(047,041,038,.333);
+  color:white;
+}
+/** </sprucing up the side nav> **/
+
+/** <list of homepage drawer items to be edited> **/
 .drawers li a {
   text-decoration: none;
   display: block;
@@ -241,12 +288,18 @@ nav li a,
   left: .66rem;
   transition: transform 400ms, text-shadow 400ms;
   transform: scale(1);
-  text-shadow: 0 0 0 rgba(096,103,103,0);
+  text-shadow: 0 0 0 rgba(047,041,038,0), 0 0 0 rgba(096,103,103,0);
 }
 
 .drawers li:first-child:hover i.fa-plus {
-  transform: scale(1.25);
-  text-shadow: 0 0 .1em rgba(096,103,103,.33);
+  transform: scale(1.33);
+  text-shadow: 1px 1px 1px rgba(047,041,038,.8), 0 0 2px rgba(096,103,103,.8);
+}
+.drawers li:first-child:active i.fa-plus {
+  transform: scale(1.5);
+  text-shadow: 0 0 0 rgba(047,041,038,0), 0 0 5px rgba(096,103,103,.9);
+  color: rgba(096,103,103,1);
+  transition: color 400ms, transform 400ms, text-shadow 400ms;
 }
 
 .content {
@@ -257,32 +310,11 @@ nav li a,
   margin-left: -2rem;
   margin-right: -2rem;
 }
-
-/** sprucing up the side nav **/
-
-nav .menu .fa {
-  padding: .575em 0;
-  height: 2.2em;
-  width: 2.2em;
-  text-align: center;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 0.33em 0 rgba(047,041,038,.333);
-  margin-right: .5em;
-  transition: all 400ms;
-  color:rgba(132,132,120,1);
-}
-
-nav .menu a:hover .fa {
-  background-color: rgba(194,211,186,1);
-  box-shadow: 0 0 0em 0 rgba(047,041,038,.333);
-  color:white;
-}
-
+/** </list of items to be edited> **/
 
 /***** editable form stuff, this should go into a new place, specifically for that stuff,
 and a lot should probably be attempted to be made into the JS inline styles stuff ******/
-
+/** this will be mostly things that are probably going to be reused to some extent across other CAPE tools **/
 .editable-click,
 .editable-parent,
 .editable-row,
@@ -369,6 +401,7 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
   width: 50%;
   min-width: 300px;
 }
+/** End basic editor styles **/
 
 /** image library grid on image uploader page... **/
 .imageZone .fileInput {
@@ -386,8 +419,6 @@ and a lot should probably be attempted to be made into the JS inline styles stuf
 .imageLibrary .imageWrapper {
   padding: 1rem;
 }
-
-button {  cursor: pointer; }
 
 .delete {
   position: absolute;
@@ -435,7 +466,6 @@ button {  cursor: pointer; }
    -o-box-shadow: 0 0 0 2px #fff,0 0 1px 4px rgba(195,115,099,.8);
    box-shadow: 0 0 0 2px #fff, 0 0 1px 4px rgba(195,115,099,.8);
  }
-
 
 .drawers .date {
   font-family: monospace;
@@ -514,13 +544,4 @@ button {  cursor: pointer; }
   font-family: 'DL';
   position: absolute;
   z-index: 10;
-}
-.flex {
-  display:flex;
-}
-
-.flex-center {
-  justify-content: center;
-  align-items: center;
-  align-content: center;
 }

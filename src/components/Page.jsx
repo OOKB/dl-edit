@@ -7,14 +7,14 @@ import { Menu } from './connected'
 function Page({ children, className, id, style }) {
   return (
     <page className={className} id={id} style={style}>
-      <Header />
+      {/* <Header /> */}
       <main>
         <nav className="bg-lightgray"><Menu /></nav>
         <div>
           {children}
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </page>
   )
 }
