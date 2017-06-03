@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { map } from 'lodash'
 import css from 'cape-style'
+import FileSelect from 'cape-mixer/lib/FileUpload/FileSelectContainer'
 import Page from './Page'
-import FileSelect from './FileUpload/FileSelectContainer'
 import Item from './Item'
 
 const start = 1481955756282
@@ -18,6 +18,7 @@ Image.propTypes = {
   name: PropTypes.string.isRequired,
   url: PropTypes.string,
 }
+Image.defaultProps = { url: null }
 
 function ImageUploadPg({ accept, collectionId, handleUpload, images, item }) {
   return (

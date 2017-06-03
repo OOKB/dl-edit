@@ -3,8 +3,8 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators } from 'redux'
 import { createObj } from 'cape-lodash'
 import { auth, logout } from 'cape-firebase'
+import { getRouteId } from 'cape-react-app'
 import { filterPerms } from './perms'
-import { getRouteId } from '../redux/routing'
 
 export const getMenu = property('db.menu')
 

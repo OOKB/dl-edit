@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import css from 'cape-style'
+import Fields from 'cape-mixer/lib/Editable/Fields'
 import Page from './Page'
-import Fields from './Editable/Fields'
 import Drawer from './Drawer'
 
 function EntityEdit({ id, title, entityType, ...props }) {
