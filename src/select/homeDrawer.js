@@ -30,7 +30,7 @@ export const image = {
 }
 export const description = {
   id: 'description',
-  // description: '',
+  description: 'This input accepts Markdown. _italic_, **bold**, # headline, ## subhead, ### lesser heading …, [link](http://urlhere)',
   position: 1,
   name: 'Description',
   type: 'textarea',
