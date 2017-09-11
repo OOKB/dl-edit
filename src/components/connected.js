@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { imageSelector, handleSelect } from 'cape-mixer/lib/image'
+import MenuEl from 'cape-mixer/lib/Menu/MenuEl'
 import { menuActions, menuSelector } from '../select/menu'
 
 import { drawerActions, drawerEdit, drawerSelector } from '../select/homeDrawer'
 import DrawerEditPg from './DrawerEdit'
 import HomeDrawerPg from './HomeDrawerPg'
-import MenuEl from './Menu'
 import ImageUploadPg from './ImageUploadPg'
 
 export const DrawerEdit = connect(drawerEdit)(DrawerEditPg)
