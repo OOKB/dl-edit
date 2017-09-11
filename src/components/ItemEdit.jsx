@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import css from 'cape-style'
 import Link from 'redux-history-component'
 import moment from 'moment'

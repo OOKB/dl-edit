@@ -3,7 +3,7 @@ import { fullEntitySelector, tripleDel } from 'redux-graph'
 import { getSelect, structuredSelector } from 'cape-select'
 import { saveEntity, deleteEntity, deleteTriple, saveTriple } from 'cape-firebase'
 import { createHistory } from 'redux-history-sync'
-import { routeParam } from 'cape-react-app'
+import { routeParam } from 'cape-router'
 
 // import { open } from 'redux-field'
 import { HOME_DRAWER } from '../config'
@@ -51,7 +51,7 @@ export function createItem() {
     // Create a new entity in firebase.
     dispatch(saveEntity({ type: HOME_DRAWER }))
     // Tell redux to open the new entity.
-    .then(({ id }) => dispatch(createHistory(`/home-drawer/${id}`)))
+      .then(({ id }) => dispatch(createHistory(`/home-drawer/${id}`)))
   }
 }
 const getEntityId = routeParam('id')

@@ -3,7 +3,7 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators } from 'redux'
 import { createObj } from 'cape-lodash'
 import { auth, logout } from 'cape-firebase'
-import { getRouteId } from 'cape-react-app'
+import { getRouteId } from 'cape-router'
 import css from 'cape-style'
 import { filterPerms } from './perms'
 

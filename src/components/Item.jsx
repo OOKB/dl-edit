@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { capitalize } from 'lodash'
 
 function Item({ category, color, hasImage, id, image, name }) {
