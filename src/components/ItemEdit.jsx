@@ -13,7 +13,7 @@ function ItemEdit({ dateModified, onCheckbox, onDelete, id, isActive, title }) {
         <span className="control-indicator" />
       </label>
       <button className="delete bg-orange-hover" onClick={onDelete}>Delete</button>
-      <Link href={`/home-drawer/${id}`} className="brown bg-gray-hover white-hover">
+      <Link routeId="drawerEdit" id={id} className="brown bg-gray-hover white-hover">
         {/* <Icon symbol="documents" /> */}
         <span className="date">{moment(dateModified).format('M/D/YY')}</span>
         <span className="title" style={css('pl1')}>{title}</span>

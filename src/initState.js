@@ -2,9 +2,10 @@ import reducer, { addRoutes } from 'location-info'
 
 export const routes = {
   home: '/',
-  homeDrawer: '/home-drawer',
+  drawer: '/home-drawer',
   drawerEdit: '/home-drawer/:id',
   image: '/image-upload',
+  dataUpdates: '/data',
 }
 export const locInfo = reducer(undefined, addRoutes(routes))
 export default {
